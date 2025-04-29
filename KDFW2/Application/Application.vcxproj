@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{7c7c960c-1451-4dce-9156-c49d26c42d4b}</ProjectGuid>
+    <RootNamespace>Application</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>Src;Src\1_Framework;Src\2_CoreSystem;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ForcedIncludeFiles>Pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ObjectFileOutput>
+      </ObjectFileOutput>
+      <AdditionalIncludeDirectories>Src\2_CoreSystem\Graphics\Shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <VariableName>compiledBuffer</VariableName>
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).csh</HeaderFileOutput>
+    </FxCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>Src;Src\1_Framework;Src\2_CoreSystem;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <ForcedIncludeFiles>Pch.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ObjectFileOutput>
+      </ObjectFileOutput>
+      <AdditionalIncludeDirectories>Src\2_CoreSystem\Graphics\Shader;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <VariableName>compiledBuffer</VariableName>
+      <HeaderFileOutput>%(RelativeDir)\%(Filename).csh</HeaderFileOutput>
+    </FxCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\0_App\main.h" />
+    <ClInclude Include="Src\0_App\Scripts\Collision.h" />
+    <ClInclude Include="Src\0_App\Scripts\Gravity.h" />
+    <ClInclude Include="Src\0_App\Scripts\Player.h" />
+    <ClInclude Include="Src\0_App\Shader\PP_Bloom\PP_Bloom.h" />
+    <ClInclude Include="Src\0_App\Shader\PP_SSAO\PP_SSAO.h" />
+    <ClInclude Include="Src\0_App\Shader\PP_ToneMapping\PP_ToneMapping.h" />
+    <ClInclude Include="Src\0_App\Windows\Resource.h" />
+    <ClInclude Include="Src\0_App\Windows\targetver.h" />
+    <ClInclude Include="Src\0_App\Windows\WindowsWindow.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdAnimationComponent.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdCameraComponent.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdComponent.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdLightComponent.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdScriptComponent.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdTransformComponent.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdModelRendererComponent.h" />
+    <ClInclude Include="Src\1_Framework\Editor\ImGuiHelper.h" />
+    <ClInclude Include="Src\1_Framework\Editor\KdEditorData.h" />
+    <ClInclude Include="Src\1_Framework\imgui\imgui.h" />
+    <ClInclude Include="Src\1_Framework\imgui\ImGuizmo.h" />
+    <ClInclude Include="Src\1_Framework\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="Src\1_Framework\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="Src\1_Framework\imgui\imgui_internal.h" />
+    <ClInclude Include="Src\1_Framework\imgui\imgui_stdlib.h" />
+    <ClInclude Include="Src\1_Framework\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Src\1_Framework\imgui\imstb_textedit.h" />
+    <ClInclude Include="Src\1_Framework\imgui\imstb_truetype.h" />
+    <ClInclude Include="Src\1_Framework\KdFramework.h" />
+    <ClInclude Include="Src\1_Framework\KdGameObject.h" />
+    <ClInclude Include="Src\1_Framework\KdInput.h" />
+    <ClInclude Include="Src\1_Framework\KdScene.h" />
+    <ClInclude Include="Src\1_Framework\KdScreenData.h" />
+    <ClInclude Include="Src\1_Framework\KdTime.h" />
+    <ClInclude Include="Src\1_Framework\KdRenderSettings.h" />
+    <ClInclude Include="Src\2_CoreSystem\Audio\KdAudio.h" />
+    <ClInclude Include="Src\2_CoreSystem\ClassAssembly\KdClassAssembly.h" />
+    <ClInclude Include="Src\2_CoreSystem\CoreSystem.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdAnimationData.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdDirectX.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdBuffer.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdDirect3D.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdGraphics.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdGraphicsStates.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdMesh.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdMeshLoader.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdTexture.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\BlitShader\KdBlitShader.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\KdMaterial.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\KdShader.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\KdShaderManager.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\SkinningShader\KdSkinningShader.h" />
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\StandardShader\KdStandardShader.h" />
+    <ClInclude Include="Src\2_CoreSystem\KdObject.h" />
+    <ClInclude Include="Src\2_CoreSystem\Math\KdCollision.h" />
+    <ClInclude Include="Src\2_CoreSystem\Math\KdEase.h" />
+    <ClInclude Include="Src\2_CoreSystem\Math\KdMath.h" />
+    <ClInclude Include="Src\2_CoreSystem\nlohmann\json.hpp" />
+    <ClInclude Include="Src\2_CoreSystem\nlohmann\KdJsonUtility.h" />
+    <ClInclude Include="Src\2_CoreSystem\ResourceManager\KdResourceManager.h" />
+    <ClInclude Include="Src\2_CoreSystem\Utilities\KdGuid.h" />
+    <ClInclude Include="Src\2_CoreSystem\Utilities\strconv.h" />
+    <ClInclude Include="Src\Pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\0_App\main.cpp" />
+    <ClCompile Include="Src\0_App\Scripts\Collision.cpp" />
+    <ClCompile Include="Src\0_App\Scripts\Gravity.cpp" />
+    <ClCompile Include="Src\0_App\Scripts\Player.cpp" />
+    <ClCompile Include="Src\0_App\Shader\PP_Bloom\PP_Bloom.cpp" />
+    <ClCompile Include="Src\0_App\Shader\PP_SSAO\PP_SSAO.cpp" />
+    <ClCompile Include="Src\0_App\Shader\PP_ToneMapping\PP_ToneMapping.cpp" />
+    <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdAnimationComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdCameraComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdLightComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdScriptComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdTransformComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdModelRendererComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Editor\ImGuiHelper.cpp" />
+    <ClCompile Include="Src\1_Framework\Editor\KdEditorData.cpp" />
+    <ClCompile Include="Src\1_Framework\imgui\imgui.cpp" />
+    <ClCompile Include="Src\1_Framework\imgui\ImGuizmo.cpp" />
+    <ClCompile Include="Src\1_Framework\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Src\1_Framework\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Src\1_Framework\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Src\1_Framework\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="Src\1_Framework\imgui\imgui_stdlib.cpp" />
+    <ClCompile Include="Src\1_Framework\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Src\1_Framework\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Src\1_Framework\KdFramework.cpp" />
+    <ClCompile Include="Src\1_Framework\KdGameObject.cpp" />
+    <ClCompile Include="Src\1_Framework\KdInput.cpp" />
+    <ClCompile Include="Src\1_Framework\KdScene.cpp" />
+    <ClCompile Include="Src\1_Framework\KdScreenData.cpp" />
+    <ClCompile Include="Src\1_Framework\KdTime.cpp" />
+    <ClCompile Include="Src\1_Framework\KdRenderSettings.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Audio\KdAudio.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\ClassAssembly\KdClassAssembly.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdAnimationData.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdBuffer.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdDirect3D.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdGraphicsStates.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdMesh.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdMeshLoader.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdTexture.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\BlitShader\KdBlitShader.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\KdMaterial.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\KdShader.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\KdShaderManager.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\SkinningShader\KdSkinningShader.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\StandardShader\KdStandardShader.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Math\KdCollision.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Math\KdEase.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Math\KdMath.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\ResourceManager\KdResourceManager.cpp" />
+    <ClCompile Include="Src\Pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Src\0_App\Windows\Application.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Src\0_App\Windows\Application.ico" />
+    <Image Include="Src\0_App\Windows\small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Src\2_CoreSystem\Graphics\Shader\inc_KdShaderCore.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Src\2_CoreSystem\Graphics\Shader\BlitShader\BlitShader_PS.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </ObjectFileOutput>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="Src\2_CoreSystem\Graphics\Shader\BlitShader\BlitShader_VS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Src\2_CoreSystem\Graphics\Shader\SkinningShader\Skinning_VS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\Microsoft.XAudio2.Redist.1.2.11\build\native\Microsoft.XAudio2.Redist.targets" Condition="Exists('..\packages\Microsoft.XAudio2.Redist.1.2.11\build\native\Microsoft.XAudio2.Redist.targets')" />
+    <Import Project="..\packages\directxtk_desktop_2019.2024.10.29.1\build\native\directxtk_desktop_2019.targets" Condition="Exists('..\packages\directxtk_desktop_2019.2024.10.29.1\build\native\directxtk_desktop_2019.targets')" />
+    <Import Project="..\packages\directxtex_desktop_2019.2024.10.29.1\build\native\directxtex_desktop_2019.targets" Condition="Exists('..\packages\directxtex_desktop_2019.2024.10.29.1\build\native\directxtex_desktop_2019.targets')" />
+    <Import Project="..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets" Condition="Exists('..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>このプロジェクトは、このコンピューター上にない NuGet パッケージを参照しています。それらのパッケージをダウンロードするには、[NuGet パッケージの復元] を使用します。詳細については、http://go.microsoft.com/fwlink/?LinkID=322105 を参照してください。見つからないファイルは {0} です。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.XAudio2.Redist.1.2.11\build\native\Microsoft.XAudio2.Redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.XAudio2.Redist.1.2.11\build\native\Microsoft.XAudio2.Redist.targets'))" />
+    <Error Condition="!Exists('..\packages\directxtk_desktop_2019.2024.10.29.1\build\native\directxtk_desktop_2019.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtk_desktop_2019.2024.10.29.1\build\native\directxtk_desktop_2019.targets'))" />
+    <Error Condition="!Exists('..\packages\directxtex_desktop_2019.2024.10.29.1\build\native\directxtex_desktop_2019.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\directxtex_desktop_2019.2024.10.29.1\build\native\directxtex_desktop_2019.targets'))" />
+    <Error Condition="!Exists('..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AssimpCpp.5.0.1.6\build\native\AssimpCpp.targets'))" />
+  </Target>
+</Project>

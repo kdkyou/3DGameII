@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="0_App">
+      <UniqueIdentifier>{42dd8ec5-7e5f-4d43-adb0-9c57499dee61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_App\Windows">
+      <UniqueIdentifier>{60d0dc9f-8660-459e-ac0a-2358b20f4fc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1_Framework">
+      <UniqueIdentifier>{5b876815-0722-4ffd-828a-954f2cca690f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem">
+      <UniqueIdentifier>{87117f00-2813-471a-b02b-3eb5e9678e53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\ClassAssembly">
+      <UniqueIdentifier>{6aa214f2-edb2-442e-9292-0a15e8d2fa09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\nlohmann">
+      <UniqueIdentifier>{e7993eb4-359e-4792-9c91-b808278e8eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\Graphics">
+      <UniqueIdentifier>{b9b4ac0a-9024-4cc5-981d-ee71cd667a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\Audio">
+      <UniqueIdentifier>{b47c9571-5a0b-405d-8eb2-58b4854f2724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\Math">
+      <UniqueIdentifier>{461c91b5-4839-4099-ab70-35bc15fb27fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1_Framework\imgui">
+      <UniqueIdentifier>{09f613f6-735f-47c0-8a2d-39c3ee9c228b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\Graphics\Shader">
+      <UniqueIdentifier>{084f3c6b-d235-40c2-9614-7fa045efcea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_App\Shader">
+      <UniqueIdentifier>{05a8a9cb-c077-4156-867c-70b908792955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1_Framework\Component">
+      <UniqueIdentifier>{fc1f0eeb-6fe8-4b23-8785-c5754ef47304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1_Framework\Editor">
+      <UniqueIdentifier>{ff809e16-2c41-4cc5-b69e-b961f5011bcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\Graphics\Shader\BlitShader">
+      <UniqueIdentifier>{3cd375ab-37f3-481f-9ac1-2f88f6f0a9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_App\Shader\PP_ToneMapping">
+      <UniqueIdentifier>{d48939e3-ae2d-4907-b195-56cabed5d825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_App\Shader\PP_SSAO">
+      <UniqueIdentifier>{fb6482b6-1269-4971-9b90-6da6b76a2b87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\Utilities">
+      <UniqueIdentifier>{543cf835-2d41-49ca-98a3-5824d1569a99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\ResourceManager">
+      <UniqueIdentifier>{17cbd3c4-b632-479b-aced-bb50cd9cd67f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\Graphics\Shader\Skinning">
+      <UniqueIdentifier>{52c1e3ab-c78e-4c9c-85d9-9e0adaa72374}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2_CoreSystem\Graphics\Shader\StandardShader">
+      <UniqueIdentifier>{ec78bbe4-3b00-4a5c-9a31-268b4cc0f8ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_App\Scripts">
+      <UniqueIdentifier>{ae6ffe61-885a-48e3-93f3-d2c3a7f837ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_App\Shader\PP_Bloom">
+      <UniqueIdentifier>{0a461c6d-18a6-4536-b76b-850cea70aeaa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\0_App\Windows\WindowsWindow.h">
+      <Filter>0_App\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\0_App\main.h">
+      <Filter>0_App</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Pch.h" />
+    <ClInclude Include="Src\0_App\Windows\Resource.h">
+      <Filter>0_App\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\0_App\Windows\targetver.h">
+      <Filter>0_App\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\ClassAssembly\KdClassAssembly.h">
+      <Filter>2_CoreSystem\ClassAssembly</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\nlohmann\json.hpp">
+      <Filter>2_CoreSystem\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\CoreSystem.h">
+      <Filter>2_CoreSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdDirectX.h">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Audio\KdAudio.h">
+      <Filter>2_CoreSystem\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdDirect3D.h">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Math\KdMath.h">
+      <Filter>2_CoreSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdBuffer.h">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdTexture.h">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\imgui\imgui.h">
+      <Filter>1_Framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\imgui\imgui_internal.h">
+      <Filter>1_Framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\imgui\imstb_rectpack.h">
+      <Filter>1_Framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\imgui\imstb_textedit.h">
+      <Filter>1_Framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\imgui\imstb_truetype.h">
+      <Filter>1_Framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\imgui\imgui_impl_dx11.h">
+      <Filter>1_Framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\imgui\imgui_impl_win32.h">
+      <Filter>1_Framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\imgui\imgui_stdlib.h">
+      <Filter>1_Framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdMesh.h">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdMeshLoader.h">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\KdShaderManager.h">
+      <Filter>2_CoreSystem\Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdGraphics.h">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\KdShader.h">
+      <Filter>2_CoreSystem\Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\KdTime.h">
+      <Filter>1_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\KdFramework.h">
+      <Filter>1_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\KdGameObject.h">
+      <Filter>1_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdComponent.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdTransformComponent.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdModelRendererComponent.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdCameraComponent.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\BlitShader\KdBlitShader.h">
+      <Filter>2_CoreSystem\Graphics\Shader\BlitShader</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdGraphicsStates.h">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\KdInput.h">
+      <Filter>1_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\KdScreenData.h">
+      <Filter>1_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\Editor\KdEditorData.h">
+      <Filter>1_Framework\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\KdMaterial.h">
+      <Filter>2_CoreSystem\Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\0_App\Shader\PP_ToneMapping\PP_ToneMapping.h">
+      <Filter>0_App\Shader\PP_ToneMapping</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\0_App\Shader\PP_SSAO\PP_SSAO.h">
+      <Filter>0_App\Shader\PP_SSAO</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Utilities\KdGuid.h">
+      <Filter>2_CoreSystem\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdLightComponent.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\imgui\ImGuizmo.h">
+      <Filter>1_Framework\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\KdObject.h">
+      <Filter>2_CoreSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\ResourceManager\KdResourceManager.h">
+      <Filter>2_CoreSystem\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\SkinningShader\KdSkinningShader.h">
+      <Filter>2_CoreSystem\Graphics\Shader\Skinning</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\nlohmann\KdJsonUtility.h">
+      <Filter>2_CoreSystem\nlohmann</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\KdScene.h">
+      <Filter>1_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Utilities\strconv.h">
+      <Filter>2_CoreSystem\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\Editor\ImGuiHelper.h">
+      <Filter>1_Framework\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\Shader\StandardShader\KdStandardShader.h">
+      <Filter>2_CoreSystem\Graphics\Shader\StandardShader</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdScriptComponent.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Graphics\KdAnimationData.h">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdAnimationComponent.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\1_Framework\KdRenderSettings.h">
+      <Filter>1_Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\0_App\Shader\PP_Bloom\PP_Bloom.h">
+      <Filter>0_App\Shader\PP_Bloom</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Math\KdEase.h">
+      <Filter>2_CoreSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\Math\KdCollision.h">
+      <Filter>2_CoreSystem\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\0_App\Scripts\Collision.h">
+      <Filter>0_App\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\0_App\Scripts\Player.h">
+      <Filter>0_App\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\0_App\Scripts\Gravity.h">
+      <Filter>0_App\Scripts</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp">
+      <Filter>0_App\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\main.cpp">
+      <Filter>0_App</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Pch.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\ClassAssembly\KdClassAssembly.cpp">
+      <Filter>2_CoreSystem\ClassAssembly</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Audio\KdAudio.cpp">
+      <Filter>2_CoreSystem\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdDirect3D.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdBuffer.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdTexture.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\imgui\imgui.cpp">
+      <Filter>1_Framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\imgui\imgui_demo.cpp">
+      <Filter>1_Framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\imgui\imgui_draw.cpp">
+      <Filter>1_Framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\imgui\imgui_tables.cpp">
+      <Filter>1_Framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\imgui\imgui_widgets.cpp">
+      <Filter>1_Framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\imgui\imgui_impl_dx11.cpp">
+      <Filter>1_Framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\imgui\imgui_impl_win32.cpp">
+      <Filter>1_Framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\imgui\imgui_stdlib.cpp">
+      <Filter>1_Framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdMesh.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdMeshLoader.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\KdShaderManager.cpp">
+      <Filter>2_CoreSystem\Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\KdShader.cpp">
+      <Filter>2_CoreSystem\Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\KdTime.cpp">
+      <Filter>1_Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\KdFramework.cpp">
+      <Filter>1_Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\KdGameObject.cpp">
+      <Filter>1_Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdComponent.cpp">
+      <Filter>1_Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdTransformComponent.cpp">
+      <Filter>1_Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdModelRendererComponent.cpp">
+      <Filter>1_Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdCameraComponent.cpp">
+      <Filter>1_Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\BlitShader\KdBlitShader.cpp">
+      <Filter>2_CoreSystem\Graphics\Shader\BlitShader</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\KdInput.cpp">
+      <Filter>1_Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Editor\KdEditorData.cpp">
+      <Filter>1_Framework\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdGraphicsStates.cpp" />
+    <ClCompile Include="Src\1_Framework\KdScreenData.cpp">
+      <Filter>1_Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\KdMaterial.cpp">
+      <Filter>2_CoreSystem\Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdGraphicsStates.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Shader\PP_ToneMapping\PP_ToneMapping.cpp">
+      <Filter>0_App\Shader\PP_ToneMapping</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Shader\PP_SSAO\PP_SSAO.cpp">
+      <Filter>0_App\Shader\PP_SSAO</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdLightComponent.cpp">
+      <Filter>1_Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\imgui\ImGuizmo.cpp">
+      <Filter>1_Framework\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\ResourceManager\KdResourceManager.cpp">
+      <Filter>2_CoreSystem\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\SkinningShader\KdSkinningShader.cpp">
+      <Filter>2_CoreSystem\Graphics\Shader\Skinning</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Math\KdMath.cpp">
+      <Filter>2_CoreSystem\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdGraphicsStates.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\KdScene.cpp">
+      <Filter>1_Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Editor\ImGuiHelper.cpp">
+      <Filter>1_Framework\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\Shader\StandardShader\KdStandardShader.cpp">
+      <Filter>2_CoreSystem\Graphics\Shader\StandardShader</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdGraphicsStates.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdScriptComponent.cpp">
+      <Filter>1_Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdAnimationData.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdAnimationComponent.cpp">
+      <Filter>1_Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\KdRenderSettings.cpp">
+      <Filter>1_Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Shader\PP_Bloom\PP_Bloom.cpp">
+      <Filter>0_App\Shader\PP_Bloom</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Math\KdEase.cpp">
+      <Filter>2_CoreSystem\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Math\KdCollision.cpp">
+      <Filter>2_CoreSystem\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Scripts\Collision.cpp">
+      <Filter>0_App\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Scripts\Player.cpp">
+      <Filter>0_App\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Scripts\Gravity.cpp">
+      <Filter>0_App\Scripts</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Src\0_App\Windows\Application.rc">
+      <Filter>0_App\Windows</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Src\0_App\Windows\Application.ico">
+      <Filter>0_App\Windows</Filter>
+    </Image>
+    <Image Include="Src\0_App\Windows\small.ico">
+      <Filter>0_App\Windows</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Src\2_CoreSystem\Graphics\Shader\inc_KdShaderCore.hlsli">
+      <Filter>2_CoreSystem\Graphics\Shader</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Src\2_CoreSystem\Graphics\Shader\BlitShader\BlitShader_PS.hlsl">
+      <Filter>2_CoreSystem\Graphics\Shader\BlitShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Src\2_CoreSystem\Graphics\Shader\BlitShader\BlitShader_VS.hlsl">
+      <Filter>2_CoreSystem\Graphics\Shader\BlitShader</Filter>
+    </FxCompile>
+    <FxCompile Include="Src\2_CoreSystem\Graphics\Shader\SkinningShader\Skinning_VS.hlsl">
+      <Filter>2_CoreSystem\Graphics\Shader\Skinning</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
