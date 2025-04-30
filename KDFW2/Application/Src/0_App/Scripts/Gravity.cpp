@@ -1,6 +1,9 @@
 #include"KdFramework.h"
 #include"Gravity.h"
 
+//フレームワークにコンポーネントであることを登録
+SetClassAssembly(Gravity, "Component");
+
 void Gravity::Start()
 {
 
@@ -8,7 +11,8 @@ void Gravity::Start()
 
 void Gravity::Update()
 {
-	if (IsEnable() == false) { return; }
+	if (IsEnable() == false) 
+	{ return; }
 
 	//入力検知
 	auto& keyboard = KdInput::GetInstance().GetKeyboardState();
@@ -31,7 +35,7 @@ void Gravity::Update()
 			isJump = true;
 		}
 	}
-	else {
+	else if(m_isSelect==Select::Auto) {
 		//インターバル減少
 		--m_interval;
 
@@ -92,9 +96,13 @@ void Gravity::Editor_ImGui()
 void Gravity::Serialize(nlohmann::json& outJson) const
 {
 	KdComponent::Serialize(outJson);
+	outJson["Gravity"] = m_gravity;
+	outJson["JumpPow"] = m_jumpPow;
 }
 
 void Gravity::Deserialize(const nlohmann::json& jsonObj)
 {
 	KdComponent::Deserialize(jsonObj);
+	KdJsonUtility::GetValue(jsonObj, "Gravity", &m_gravity);
+	KdJsonUtility::GetValue(jsonObj, "JumpPow", &m_jumpPow);
 }

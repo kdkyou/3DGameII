@@ -161,6 +161,7 @@
     <ClInclude Include="Src\0_App\Scripts\Collision.h" />
     <ClInclude Include="Src\0_App\Scripts\Gravity.h" />
     <ClInclude Include="Src\0_App\Scripts\Player.h" />
+    <ClInclude Include="Src\0_App\Shader\Polygon\KdPolygon.h" />
     <ClInclude Include="Src\0_App\Shader\PP_Bloom\PP_Bloom.h" />
     <ClInclude Include="Src\0_App\Shader\PP_SSAO\PP_SSAO.h" />
     <ClInclude Include="Src\0_App\Shader\PP_ToneMapping\PP_ToneMapping.h" />
@@ -226,6 +227,7 @@
     <ClCompile Include="Src\0_App\Scripts\Collision.cpp" />
     <ClCompile Include="Src\0_App\Scripts\Gravity.cpp" />
     <ClCompile Include="Src\0_App\Scripts\Player.cpp" />
+    <ClCompile Include="Src\0_App\Shader\Polygon\KdPolygon.cpp" />
     <ClCompile Include="Src\0_App\Shader\PP_Bloom\PP_Bloom.cpp" />
     <ClCompile Include="Src\0_App\Shader\PP_SSAO\PP_SSAO.cpp" />
     <ClCompile Include="Src\0_App\Shader\PP_ToneMapping\PP_ToneMapping.cpp" />

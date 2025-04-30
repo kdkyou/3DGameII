@@ -93,15 +93,22 @@ bool Application::Initialize()
 
 	//Effect用シェーダーの読み込み
 	{
-		//auto shader = std::make_shared<KdShader>();
+		auto shader = std::make_shared<KdShader>();
 
-		////通常描画
-		//shader->LoadShaderAndSetPass(
-		//	"Assets/Shader/EffectShader",		//シェーダーまでのパス
-		//	"EffectShader.hlsl",				//シェーダーファイル名
-		//	KdShader::PassTags::Forward,		//このシェーダーをいつ通す想定か
-		//	"Default",							//
-		//	"VS", "PS", "");
+		//通常描画
+		shader->LoadShaderAndSetPass(
+			"Assets/Shader/EffectShader",		//シェーダーまでのパス
+			"EffectShader.hlsl",				//シェーダーファイル名
+			KdShader::PassTags::Forward,		//このシェーダーをいつ通す想定か
+			"Default",							//このパス名
+			"VS",								//使用する頂点シェーダーの関数名
+			"PS",								//使用するピクセルシェーダーの関数名
+			"");								//使用数ジオメトリシェーダーの関数名
+	// パス＝描画に関わる一連の処理の流れ
+
+	//シェーダーマネージャーに登録
+		KdShaderManager::GetInstance().AddShader("Effect", shader);
+
 	}
 
 	// KD Framework 初期化
