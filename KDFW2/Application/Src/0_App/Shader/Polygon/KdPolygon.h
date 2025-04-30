@@ -1,3 +1,6 @@
 #pragma once
 
-//class KdPolygon :public kdpostprocess 
+class KdPolygon 
+{
+
+};
