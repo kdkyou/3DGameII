@@ -1,5 +1,8 @@
 #pragma once
 
+//クラスの前方宣言
+class Gravity;
+
 //当たり判定を制御するコンポーネント
 
 class Collision :public KdScriptComponent
@@ -10,6 +13,7 @@ public:
 	{
 		std::string Name = "";
 		bool isEnable = true;
+		bool isGravity = true;
 		KdVector3 startPos = {0,0,0};
 		KdVector3 correction = {0,0,0};
 		KdVector3 direction = { 0,0,0 };
@@ -25,6 +29,8 @@ public:
 		KdVector3 vPushBack = {0,0,0};
 	};
 
+	//当たったかどうかのみを返すレイ判定
+	bool RayCast(const KdVector3& startPos, const KdVector3& direction);
 
 	void Start()		override;
 	void Update()		override;
@@ -46,5 +52,8 @@ private:
 
 	std::vector<RayColInfo> m_rayDatas;
 	std::vector<SphereColInfo>m_sphereDatas;
+
+	//重力コンポーネント
+	std::shared_ptr<Gravity> m_spGravity = nullptr;
 	
 }; 

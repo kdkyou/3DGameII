@@ -4,6 +4,7 @@
 
 #include "Editor/KdEditorData.h"
 
+
 //SetClassAssembly(KdMeshRenderer, "Component");
 SetClassAssembly(KdModelRendererComponent, "Component");
 
@@ -333,9 +334,24 @@ void KdModelRendererComponent::PreDraw()
 	KdFramework::GetInstance().m_renderingData.m_currentScreenData->m_drawList.push_back(this);
 }
 
+//追加
+#include"0_App/Shader/Polygon/KdPolygon.h"
+
 // 描画処理
 void KdModelRendererComponent::Draw(bool opaque, KdShader::PassTags passTag)
 {
+	////ポリゴンクラスが正しく動くか試し
+	//KdPolygon poly;
+	//poly.Initialize();
+	//poly.AddVertex(KdVector3( -0.1f,-0.1f,0));		//左下
+	//poly.AddVertex(KdVector3(-0.1f,0.1f,0));		//左上
+	//poly.AddVertex(KdVector3(0.1f,-0.1f,0));		//右下
+	//poly.AddVertex(KdVector3( 0.1f,0.1f,0));		//右上
+
+	//poly.Draw();
+	//poly.Release();
+
+
 	// ワールド行列をセット
 //	KdShaderManager::GetInstance().m_cbPerDraw->EditCB().mW = GetGameObject()->GetTransform()->GetWorldMatrix();
 //	KdShaderManager::GetInstance().m_cbPerDraw->WriteWorkData();

@@ -1,12 +1,19 @@
 #include"KdFramework.h"
 #include"Collision.h"
 
+#include"Gravity.h"
+
 //フレームワークにコンポーネントであることを登録
 SetClassAssembly(Collision, "Component");
 
+bool Collision::RayCast(const KdVector3& startPos, const KdVector3& direction)
+{
+	return false;
+}
+
 void Collision::Start()
 {
-
+	m_spGravity = GetGameObject()->GetComponent<Gravity>();
 }
 
 void Collision::Update()
@@ -28,7 +35,23 @@ void Collision::Update()
 
 		//レイ判定---------------------->
 		KdVector3 vStartPos = pos;
-		vStartPos += ray.correction;	//プレイヤーの乗り越えられる段差の高さ
+
+		//重力加算
+		float fallDist = 0;
+		if (ray.isGravity)
+		{
+			if (m_spGravity == nullptr) { break; }
+
+			//	座標移動は行われていると仮定して移動する前分ずらす
+			fallDist= -m_spGravity->GetMoveOnes().y;
+			if (fallDist<0)
+			{
+ 				fallDist = 0;
+			}
+		}
+		
+		vStartPos += ray.correction ;	//プレイヤーの乗り越えられる段差の高さ
+		vStartPos.y += fallDist;		//重力をyに加算
 
 		//キャラクター全員と当たり判定
 		for (auto&& obj : enableObjects)
@@ -64,15 +87,33 @@ void Collision::Update()
 				auto oppMat = meshMat * modelTrans->GetWorldMatrix();
 
 				//メッシュに対する当たり判定
-				bool hit = KdRayToMesh(vStartPos, ray.direction, ray.correction.y, *node.Mesh, oppMat, hitResult);
-
-				if (hit)
+				
+				if (ray.isGravity)
 				{
-					//当たった判定位置から差し戻す距離を引いた分をセットする
-					pos.y += ray.correction.y - hitResult.Distance;
-					transform->SetPosition(pos);
+					bool hit = KdRayToMesh(vStartPos, ray.direction, ray.correction.y+fallDist, *node.Mesh, oppMat, hitResult);
 
+					//
+					if (hit)
+					{
+						m_spGravity->Ground();
+						pos.y += (ray.correction.y + fallDist) - hitResult.Distance;
+						transform->SetPosition(pos);
+					}
 				}
+				else
+				{
+					bool hit = KdRayToMesh(vStartPos, ray.direction, ray.correction.y, *node.Mesh, oppMat, hitResult);
+
+					if (hit)
+					{
+						//当たった判定位置から差し戻す距離を引いた分をセットする
+						pos.y += ray.correction.y - hitResult.Distance;
+						transform->SetPosition(pos);
+
+					}
+				}
+
+				
 			}
 		}
 	}
@@ -157,6 +198,9 @@ void Collision::Editor_ImGui()
 				//判定の有効無効
 				ImGui::Checkbox(u8"有効無効",&ray.isEnable);
 
+				//重力の影響を受けるかどうか
+				ImGui::Checkbox(u8"重力", &ray.isGravity);
+
 				//レイの始める位置
 				ImGui::DragFloat3(u8"開始地点", &ray.startPos.x, 0.01f, -1.0f, 1.0f);
 
@@ -165,6 +209,7 @@ void Collision::Editor_ImGui()
 				
 				//レイの方向ベクトル
 				ImGui::DragFloat3(u8"ベクトル", &ray.direction.x, 0.01f, -1.0f, 1.0f);
+
 			}
 		ImGui::PopID();
 		}
@@ -233,150 +278,61 @@ void Collision::Serialize(nlohmann::json& outJson) const
 	for (auto&& ray : m_rayDatas)
 	{
 		nlohmann::json obj;
+		obj["Name"] = ray.Name;
 		obj["Enable"] = ray.isEnable;
-		/*obj["RayStartPos"]= ray.startPos;
-		obj["RayCorrection"]= ray.correction;
-		obj["RayDirection"] = ray.direction;
-		*/obj["RayName"] = ray.Name;
+		obj["Gravity"] = ray.isGravity;
+		obj["StartPos"]= KdJsonUtility::CreateArray(&ray.startPos.x, 3);
+		obj["Correction"]= KdJsonUtility::CreateArray(&ray.correction.x, 3);
+		obj["Direction"] = KdJsonUtility::CreateArray(&ray.direction.x, 3);
 		arr.push_back(obj);
 	}
+	outJson["RayDatas"] = arr;
 	for (auto& sphere : m_sphereDatas)
 	{
 		nlohmann::json obj;
 		obj["Enable"] = sphere.isEnable;
 		obj["Result"] = sphere.isResult;
-		/*obj["SphereCenter"] = sphere.center;
-		*/obj["SphereRadius"] = sphere.radius;
-		obj["SphereName"] = sphere.Name;
+		obj["Center"] = KdJsonUtility::CreateArray(&sphere.center.x, 3);
+		obj["Radius"] = sphere.radius;
+		obj["Name"] = sphere.Name;
 		arr.push_back(obj);
 	}
-	outJson["CollisionDatas"] = arr;
+	outJson["SphereDatas"] = arr;
 	
-
-
-
 }
 
 void Collision::Deserialize(const nlohmann::json& jsonObj)
 {
 	KdComponent::Deserialize(jsonObj);
 
+	//auto arrJson = jsonObj["RayDatas"];
+	//for (UINT idx = 0; idx < (UINT)arrJson.size(); idx++)
+	//{
+	//	RayColInfo ray;
 
+	//	// 実行時データの復元
+	//	KdJsonUtility::GetValue(arrJson.at(idx), "Name", &ray.Name);
+	//	KdJsonUtility::GetValue(arrJson.at(idx), "Enable", &ray.isEnable);
+	//	KdJsonUtility::GetValue(arrJson.at(idx), "Gravity", &ray.isGravity);
+	//	KdJsonUtility::GetArray(jsonObj, "StartPos", &ray.startPos.x,3);
+	//	KdJsonUtility::GetArray(jsonObj, "Correction", &ray.correction.x,3);
+	//	KdJsonUtility::GetArray(jsonObj, "Direction", &ray.direction.x,3);
+
+	//	m_rayDatas.push_back(ray);
+	//}
+	//arrJson = jsonObj["SphereDatas"];
+	//for (UINT idx = 0; idx < (UINT)arrJson.size(); idx++)
+	//{
+	//	SphereColInfo sphere;
+
+	//	// 実行時データの復元
+	//	KdJsonUtility::GetValue(arrJson.at(idx), "Name", &sphere.Name);
+	//	KdJsonUtility::GetValue(arrJson.at(idx), "Enable", &sphere.isEnable);
+	//	KdJsonUtility::GetValue(arrJson.at(idx), "Result", &sphere.isResult);
+	//	KdJsonUtility::GetArray(jsonObj, "Center", &sphere.center.x, 3);
+	//	KdJsonUtility::GetValue(jsonObj, "Radius", &sphere.radius );
+	//	sphere.vPushBack = {0,0,0};
+	//	
+	//	m_sphereDatas.push_back(sphere);
+	//}
 }
-
-
-//void Collision::CollisionPhase()
-//{
-//	//全ての有効(Enable)なオブジェクトを取得する
-//	auto& enableObjects = KdFramework::GetInstance().GetScene()->GetCollectedObjects();
-//
-//	//PlayerのTransform情報とposition情報を取得
-//	const auto& transform = GetGameObject()->GetTransform();
-//	auto pos = transform->GetPosition();
-//
-//	//下向きのレイ判定(着地判定)---------------------->
-//	KdVector3 vStartPos = pos;
-//	vStartPos.y += m_rayCorrection;	//プレイヤーの乗り越えられる段差の高さ
-//
-//	//キャラクター全員と当たり判定
-//	for (auto&& obj : enableObjects)
-//	{
-//		//当たり判定の対象かどうか
-//		if (obj->GetTag() != "CollisionObject") { continue; }
-//
-//		//対象がモデルデータを持っているか GetComponentの後ろに型を指定する 
-//		// #define等で型の設定をしている方が変更があった時しやすいか？
-//		const auto& modelComp = obj->GetComponent<KdModelRendererComponent>();
-//		if (modelComp == nullptr) { continue; }
-//
-//		//モデルの持ち主のTransformの取得
-//		const auto& modelTrans = modelComp->GetGameObject()->GetTransform();
-//
-//		//モデル情報の取得
-//		const auto& modelData = modelComp->GetModel();
-//		if (modelData == nullptr) { continue; }
-//
-//		//モデルに対して当たり判定
-//		for (auto& node : modelData->GetAllNodes())
-//		{
-//			//モデルに関する全ての情報を持っている為
-//			//メッシュかどうかを調べる
-//			if (node.Mesh == nullptr) { continue; }
-//
-//			//レイ判定開始
-//			KdRayHit hitResult; //結果格納場所
-//
-//			//各パーツの原点からのズレ分
-//			const auto& meshMat = modelComp->GetAllNodeTransforms()[node.NodeIndex].GetWorldMatrix();
-//			//各パーツの現在の位置
-//			auto oppMat = meshMat * modelTrans->GetWorldMatrix();
-//
-//			//メッシュに対する当たり判定
-//			bool hit = KdRayToMesh(vStartPos, KdVector3(0, -1, 0), m_rayCorrection + m_fall, *node.Mesh, oppMat, hitResult);
-//
-//			if (hit)
-//			{
-//				//当たった判定位置から差し戻す距離を引いた分をセットする
-//				pos.y += m_rayCorrection - hitResult.Distance;
-//				transform->SetPosition(pos);
-//				m_fall = 0.0f;
-//			}
-//		}
-//	}
-//	//<----------------------下向きのレイ判定(着地判定)
-//
-//
-//	//横向きの当たり判定(着地判定)---------------------->
-//	// 球体メッシュの当たり判定
-//	KdVector3 vCenter = pos;	//球の中心座標
-//	vCenter.y += m_sphereCorrection;	//少しもち上げる
-//	KdVector3 vPushBack = {};	//差し戻されるベクトルの合計
-//
-//	//前キャラクターの繰り返し
-//	for (auto&& obj : enableObjects)
-//	{
-//		//当たり判定対象か
-//		if (obj->GetTag() != "CollisionObject") { continue; }
-//
-//		//対象のモデル情報
-//		const auto& modelComp = obj->GetComponent<KdModelRendererComponent>();
-//		if (modelComp == nullptr) { continue; }
-//
-//		//対象のモデルデータ
-//		const auto& modelData = modelComp->GetModel();
-//		if (modelData == nullptr) { continue; }
-//
-//		for (auto& node : modelData->GetAllNodes())
-//		{
-//			if (node.Mesh == nullptr) { continue; }
-//
-//			auto mat = modelComp->GetAllNodeTransforms()[node.NodeIndex].GetWorldMatrix()
-//				* obj->GetTransform()->GetWorldMatrix();
-//
-//			//球判定
-//			KdSphereHit hitResult;
-//			KdVector3 vMove;	//差し戻された移動量
-//
-//			hitResult.MovedSpherePos = &vMove;
-//
-//			bool hit = KdSphereToMesh(vCenter, m_sphereRadius, *node.Mesh, mat, hitResult);
-//
-//			if (hit)
-//			{
-//				//移動した結果から元の位置を引く 差し戻し分を累積
-//				vPushBack += (vMove - vCenter);
-//			}
-//		}
-//
-//	}
-//	//上下の制限はレイ判定で行っているので不要
-//	vPushBack.y = 0;
-//	if (vPushBack.Length() > 0)
-//	{
-//		pos += vPushBack;
-//		transform->SetPosition(pos);
-//	}
-//
-//	//<----------------------横向きの当たり判定(着地判定)
-//
-//}

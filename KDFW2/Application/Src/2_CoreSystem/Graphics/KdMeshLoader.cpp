@@ -325,8 +325,8 @@ bool KdMeshScene::LoadMesh(const std::string& filename)
 					// ウェイトLoop
 					for (numWeights = 0; numWeights < outMeshData.Vertex.SkinIndexList[iV].size(); numWeights++)
 					{
-						// ウェイト合計を求める
-						if (outMeshData.Vertex.SkinIndexList[iV][numWeights])
+						// ウェイト合計を求める  0>= 追加
+						if (outMeshData.Vertex.SkinIndexList[iV][numWeights] >= 0)
 						{
 							totalWeight += outMeshData.Vertex.SkinWeightList[iV][numWeights];
 						}

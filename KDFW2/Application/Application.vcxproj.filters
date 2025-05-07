@@ -265,6 +265,12 @@
     <ClInclude Include="Src\0_App\Shader\Polygon\KdPolygon.h">
       <Filter>0_App\Shader\Polygon</Filter>
     </ClInclude>
+    <ClInclude Include="Src\0_App\Scripts\CheckList.h">
+      <Filter>0_App\Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\0_App\Scripts\ObjectList.h">
+      <Filter>0_App\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp">
@@ -433,6 +439,12 @@
     </ClCompile>
     <ClCompile Include="Src\0_App\Shader\Polygon\KdPolygon.cpp">
       <Filter>0_App\Shader\Polygon</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Scripts\CheckList.cpp">
+      <Filter>0_App\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Scripts\ObjectList.cpp">
+      <Filter>0_App\Scripts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

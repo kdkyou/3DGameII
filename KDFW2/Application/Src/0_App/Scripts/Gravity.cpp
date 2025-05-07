@@ -24,10 +24,15 @@ void Gravity::Update()
 	const auto& transform = GetGameObject()->GetTransform();
 	auto pos = transform->GetPosition();
 
-//	float vMoveOnes = 0.0f;
-	KdVector3 vMoveOnes = { 0,0,0 };
-
+	//初期化
 	bool isJump = false;
+	m_vMoveOnes = KdVector3::Zero;
+
+	if (m_isGround == true)
+	{
+		m_isGround = false;
+		m_fall = 0;
+	}
 
 	//radiobuttonのデータによる条件分岐
 	if (m_isSelect==Select::Key) {
@@ -52,10 +57,10 @@ void Gravity::Update()
 		m_fall = -m_jumpPow;
 	}
 	
-	vMoveOnes.y -= m_fall;
+	m_vMoveOnes.y -= m_fall;
 	m_fall += m_gravity * deltaTime;
 
-	pos += vMoveOnes;
+	pos += m_vMoveOnes;
 
 	//更新結果をTransformに教える
 	transform->SetLocalPosition(pos);

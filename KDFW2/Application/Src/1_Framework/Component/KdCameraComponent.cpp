@@ -49,4 +49,6 @@ void KdCameraComponent::Editor_ImGui()
 			m_proj_NearAndFar.y = m_proj_NearAndFar.x + 0.01f;
 		}
 	}
+
+	
 }

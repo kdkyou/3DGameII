@@ -68,10 +68,75 @@ void KdPolygon::CreateBuffers()
 // 送り込んだデータを使用するようにシェーダーにセット
 void KdPolygon::SetBuffers()
 {
-//	auto 
+	//全ての頂点情報を統合する（今回はポジションのみ）
+	std::vector<ID3D11Buffer*> buffers;
+	std::vector<uint32_t> strides;	//各要素のサイズ
+	std::vector<uint32_t> offsets;	//各要素をどこから開始するか
+
+	//座標
+	buffers.push_back(m_VB_Pos->GetBuffer().Get());
+	strides.push_back(sizeof(KdVector3));
+	offsets.push_back(0);
+
+	//UV情報（テクスチャのどこを使うか）
+	buffers.push_back(nullptr);
+	strides.push_back(0);
+	offsets.push_back(0);
+
+	// Targent(接線)
+	buffers.push_back(nullptr);
+	strides.push_back(0);
+	offsets.push_back(0);
+
+	//Normal（法線）
+	buffers.push_back(nullptr);
+	strides.push_back(0);
+	offsets.push_back(0);
+
+	//Color
+	buffers.push_back(nullptr);
+	strides.push_back(0);
+	offsets.push_back(0);
+
+	//シェーダー
+	D3D.GetDevContext()->IASetVertexBuffers(
+		0,								//スロット番号
+		(uint32_t)buffers.size(),		//種類の数
+		&buffers[0],					//データの本体
+		&strides[0],					//各要素のサイズ	
+		&offsets[0]						//各要素の開始位置
+	);
 
 }
 
 void KdPolygon::Draw()
 {
+	if (m_material == nullptr) { return; }
+
+	//頂点数
+	uint32_t vertexNum = (uint32_t)m_positions.size();
+
+	//面として成立していない
+	if (vertexNum < 3) { return; }
+
+	//バッファの作成（作っていなかった時のみ）
+	CreateBuffers();
+
+	//作ったバッファをシェーダーにセットする
+	SetBuffers();
+
+	//シェーダーをセット
+	m_material->SetToDevice(0);
+
+	//プリミティブトポロジーのセット
+	//頂点の結び方
+	D3D.GetDevContext()->IASetPrimitiveTopology(
+		D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+
+	//描画コール
+	D3D.GetDevContext()->Draw(
+		vertexNum,	//描画する頂点数
+		0			//開始位置
+	);
+
 }

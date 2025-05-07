@@ -28,6 +28,8 @@ public:
 
 	KdMatrix GetProjMatrix() const;
 
+	KdMatrix GetTrackingMatrix()const;
+
 	//===============================
 	// Serialize / Deserialize
 	//===============================
@@ -59,6 +61,9 @@ private:
 	// 射影行列用データ
 	float			m_proj_FOV = 60;						// 視野角
 	KdVector2		m_proj_NearAndFar = { 0.01f, 5000 };	// 最近接距離と最遠方距離
+
+	//トラッキング用データ
+	float			m_proj_TrackingSpeed = 1.0f;			//カメラが追う速度
 
 
 	// 描画先画面
