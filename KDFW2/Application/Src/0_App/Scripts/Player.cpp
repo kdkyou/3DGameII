@@ -37,12 +37,20 @@ void Player::Update()
 	//‰ºŒü‚«‚É—Ž‰º‚·‚éˆ—&ƒWƒƒƒ“ƒv‚Ìˆ—
 	//¡‚ÌŠAŽš–Ê‚Íy=0‚ÌˆÊ’u‚Æ‚·‚é
 
+	//ƒLƒƒƒ‰ƒNƒ^[‚Ì‘O•ûŒü
+	KdVector3 vf = transform->GetWorldMatrix().Backward();
+	vf.Normalize();
+
 	m_vMoveOnce = KdVector3::Zero;
 
 	if (keyboard.W)
 	{
-		m_vMoveOnce.z = 1.0f;
+		m_vMoveOnce = vf * m_speed * deltaTime;
 	}
+	/*if (keyboard.W)
+	{
+		m_vMoveOnce.z = 1.0f;
+	}*/
 	if (keyboard.A)
 	{
 		m_vMoveOnce.x = -1.0f;
@@ -60,6 +68,20 @@ void Player::Update()
 	m_vMoveOnce.Normalize();
 	m_vMoveOnce = m_vMoveOnce * m_speed * deltaTime;
 
+	// ‰ñ“]
+	//Œ»Ý‚Ì‰ñ“]î•ñ
+	KdQuaternion quat = transform->GetLocalRotation();
+
+	//‰ÁŽZ‚µ‚½‚¢‰ñ“]
+	KdQuaternion qAdd = KdQuaternion::CreateFromAxisAngle(
+		KdVector3(0,1,0),					//‰ñ“]‚Ì’†SŽ²	ŠOÏ‚ª‚¢‚¢‚¾‚ë‚¤
+		20.0f*KdDeg2Rad * deltaTime		//‰ñ“]Šp“x(ƒ‰ƒWƒAƒ“Šp“x)
+	);
+
+	//‰ñ“]‚ð“K—p				‰ÁŽZ•ª‚¾‚¯‘‚â‚µ‚½‚¢ê‡Š|‚¯ŽZ
+	transform->SetLocalRotation(quat * qAdd);
+
+
 	////ƒWƒƒƒ“ƒv
 	//if (keyboard.Space)
 	//{
@@ -69,7 +91,6 @@ void Player::Update()
 	////—Ž‰º
 	//m_vMoveOnce.y -= m_fall;
 	//m_fall += m_gravity * deltaTime;
-
 
 	pos += m_vMoveOnce;
 

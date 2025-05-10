@@ -305,34 +305,34 @@ void Collision::Deserialize(const nlohmann::json& jsonObj)
 {
 	KdComponent::Deserialize(jsonObj);
 
-	//auto arrJson = jsonObj["RayDatas"];
-	//for (UINT idx = 0; idx < (UINT)arrJson.size(); idx++)
-	//{
-	//	RayColInfo ray;
+	auto arrJson = jsonObj["RayDatas"];
+	for (UINT idx = 0; idx < (UINT)arrJson.size(); idx++)
+	{
+		RayColInfo ray;
 
-	//	// 実行時データの復元
-	//	KdJsonUtility::GetValue(arrJson.at(idx), "Name", &ray.Name);
-	//	KdJsonUtility::GetValue(arrJson.at(idx), "Enable", &ray.isEnable);
-	//	KdJsonUtility::GetValue(arrJson.at(idx), "Gravity", &ray.isGravity);
-	//	KdJsonUtility::GetArray(jsonObj, "StartPos", &ray.startPos.x,3);
-	//	KdJsonUtility::GetArray(jsonObj, "Correction", &ray.correction.x,3);
-	//	KdJsonUtility::GetArray(jsonObj, "Direction", &ray.direction.x,3);
+		// 実行時データの復元
+		KdJsonUtility::GetValue(arrJson.at(idx), "Name", &ray.Name);
+		KdJsonUtility::GetValue(arrJson.at(idx), "Enable", &ray.isEnable);
+		KdJsonUtility::GetValue(arrJson.at(idx), "Gravity", &ray.isGravity);
+		KdJsonUtility::GetArray(jsonObj, "StartPos", &ray.startPos.x,3);
+		KdJsonUtility::GetArray(jsonObj, "Correction", &ray.correction.x,3);
+		KdJsonUtility::GetArray(jsonObj, "Direction", &ray.direction.x,3);
 
-	//	m_rayDatas.push_back(ray);
-	//}
-	//arrJson = jsonObj["SphereDatas"];
-	//for (UINT idx = 0; idx < (UINT)arrJson.size(); idx++)
-	//{
-	//	SphereColInfo sphere;
+		m_rayDatas.push_back(ray);
+	}
+	arrJson = jsonObj["SphereDatas"];
+	for (UINT idx = 0; idx < (UINT)arrJson.size(); idx++)
+	{
+		SphereColInfo sphere;
 
-	//	// 実行時データの復元
-	//	KdJsonUtility::GetValue(arrJson.at(idx), "Name", &sphere.Name);
-	//	KdJsonUtility::GetValue(arrJson.at(idx), "Enable", &sphere.isEnable);
-	//	KdJsonUtility::GetValue(arrJson.at(idx), "Result", &sphere.isResult);
-	//	KdJsonUtility::GetArray(jsonObj, "Center", &sphere.center.x, 3);
-	//	KdJsonUtility::GetValue(jsonObj, "Radius", &sphere.radius );
-	//	sphere.vPushBack = {0,0,0};
-	//	
-	//	m_sphereDatas.push_back(sphere);
-	//}
+		// 実行時データの復元
+		KdJsonUtility::GetValue(arrJson.at(idx), "Name", &sphere.Name);
+		KdJsonUtility::GetValue(arrJson.at(idx), "Enable", &sphere.isEnable);
+		KdJsonUtility::GetValue(arrJson.at(idx), "Result", &sphere.isResult);
+		KdJsonUtility::GetArray(jsonObj, "Center", &sphere.center.x, 3);
+		KdJsonUtility::GetValue(jsonObj, "Radius", &sphere.radius );
+		sphere.vPushBack = {0,0,0};
+		
+		m_sphereDatas.push_back(sphere);
+	}
 }
