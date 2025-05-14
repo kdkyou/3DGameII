@@ -271,6 +271,9 @@
     <ClInclude Include="Src\0_App\Scripts\ObjectList.h">
       <Filter>0_App\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Src\0_App\Scripts\Enemy.h">
+      <Filter>0_App\Scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp">
@@ -444,6 +447,9 @@
       <Filter>0_App\Scripts</Filter>
     </ClCompile>
     <ClCompile Include="Src\0_App\Scripts\ObjectList.cpp">
+      <Filter>0_App\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Scripts\Enemy.cpp">
       <Filter>0_App\Scripts</Filter>
     </ClCompile>
   </ItemGroup>

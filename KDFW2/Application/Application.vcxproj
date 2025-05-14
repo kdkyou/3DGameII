@@ -160,6 +160,7 @@
     <ClInclude Include="Src\0_App\main.h" />
     <ClInclude Include="Src\0_App\Scripts\CheckList.h" />
     <ClInclude Include="Src\0_App\Scripts\Collision.h" />
+    <ClInclude Include="Src\0_App\Scripts\Enemy.h" />
     <ClInclude Include="Src\0_App\Scripts\Gravity.h" />
     <ClInclude Include="Src\0_App\Scripts\ObjectList.h" />
     <ClInclude Include="Src\0_App\Scripts\Player.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="Src\0_App\main.cpp" />
     <ClCompile Include="Src\0_App\Scripts\CheckList.cpp" />
     <ClCompile Include="Src\0_App\Scripts\Collision.cpp" />
+    <ClCompile Include="Src\0_App\Scripts\Enemy.cpp" />
     <ClCompile Include="Src\0_App\Scripts\Gravity.cpp" />
     <ClCompile Include="Src\0_App\Scripts\ObjectList.cpp" />
     <ClCompile Include="Src\0_App\Scripts\Player.cpp" />

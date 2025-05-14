@@ -4,6 +4,21 @@
 //フレームワークにコンポーネントであることを登録
 SetClassAssembly(CheckList, "Component");
 
+void CheckList::Start()
+{
+}
+
+void CheckList::Update()
+{
+	m_isPlayer;
+	m_isGround;
+	m_isEnemy;
+}
+
+void CheckList::LateUpdate()
+{
+}
+
 void CheckList::Serialize(nlohmann::json& outJson) const
 {
 	KdComponent::Serialize(outJson);
@@ -21,6 +36,8 @@ void CheckList::Deserialize(const nlohmann::json& jsonObj)
 	KdJsonUtility::GetValue(jsonObj, "Player", &m_isPlayer);
 	KdJsonUtility::GetValue(jsonObj, "Ground", &m_isGround);
 	KdJsonUtility::GetValue(jsonObj, "Enemy", &m_isEnemy);
+
+	m_isDirty = true;
 }
 
 void CheckList::Editor_ImGui()

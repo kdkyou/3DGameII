@@ -135,30 +135,30 @@ KdAnimationComponent::RuntimeAnimationData& KdAnimationComponent::LoadFromAnimat
 	return *(m_runtimeDatas.end() - 1);
 }
 
-//KdAnimationComponent::RuntimeAnimationData& KdAnimationComponent::LoadFromAnimationData(const std::string& path, const float speed, const float startTime)
-//{
-//	// AnimationDataを読み込む
-//	auto anim = KdResourceManager::GetInstance().LoadAsset<KdAnimationData>(path);
-//
-//	// AnimationDataと関連付けた実行時データを作成
-//	RuntimeAnimationData runtime;
-//	runtime.AniamtionData = anim;
-//	runtime.AnimationDataPath = path;
-//	runtime.AnimationName = anim->Name; // 管理名は最初はファイル名
-//	runtime.speed = speed;
-//	runtime.StartTime = startTime;
-//	m_runtimeDatas.push_back(runtime);
-//
-//	// すでにモデルがあればアニメーションデータと突き合わせておく
-//	auto modelComp = m_modelComponent.lock();
-//	if (modelComp && modelComp->GetModel() != nullptr)
-//	{
-//		runtime.CreateApplyIndexList(modelComp->GetModel()->GetAllNodes());
-//	}
-//
-//	// さっき入った要素を返す
-//	return *(m_runtimeDatas.end() - 1);
-//}
+KdAnimationComponent::RuntimeAnimationData& KdAnimationComponent::LoadAnimation(const std::string& path, const std::string& name, const float speed, const float startTime)
+{
+	// AnimationDataを読み込む
+	auto anim = KdResourceManager::GetInstance().LoadAsset<KdAnimationData>(path);
+
+	// AnimationDataと関連付けた実行時データを作成
+	RuntimeAnimationData runtime;
+	runtime.AniamtionData = anim;
+	runtime.AnimationDataPath = path;
+	runtime.AnimationName = name; // 管理名は最初はファイル名
+	runtime.speed = speed;
+	runtime.StartTime = startTime;
+
+	// すでにモデルがあればアニメーションデータと突き合わせておく
+	auto modelComp = m_modelComponent.lock();
+	if (modelComp && modelComp->GetModel() != nullptr)
+	{
+		runtime.CreateApplyIndexList(modelComp->GetModel()->GetAllNodes());
+	}
+
+	m_runtimeDatas.push_back(runtime);
+	// さっき入った要素を返す
+	return *(m_runtimeDatas.end() - 1);
+}
 
 
 // アニメーションを適用させるモデルコンポーネントの指定
@@ -337,16 +337,20 @@ void KdAnimationComponent::Deserialize(const nlohmann::json& jsonObj)
 		// アニメーションデータはファイル名を覚えているだけなので、再度作成
 		std::string path;
 		KdJsonUtility::GetValue(arrJson.at(idx), "AnimationDataPath", &path);
-		auto runtime = LoadFromAnimationData(path);
-
+		
 		// 実行時データの復元
-		KdJsonUtility::GetValue(arrJson.at(idx), "AnimationName", &runtime.AnimationName);
+		std::string name;
+		KdJsonUtility::GetValue(arrJson.at(idx), "AnimationName", &name);
 
 		//自身で追加したもの
 		//アニメーション速度
-		KdJsonUtility::GetValue(arrJson.at(idx), "AnimationSpeed", &runtime.speed);
+		float speed;
+		KdJsonUtility::GetValue(arrJson.at(idx), "AnimationSpeed", &speed);
 		//アニメーション初期開始時間
-		KdJsonUtility::GetValue(arrJson.at(idx), "AnimationStartTime", &runtime.StartTime);
+		float startTime;
+		KdJsonUtility::GetValue(arrJson.at(idx), "AnimationStartTime", &startTime);
+
+		LoadAnimation(path, name, speed, startTime);
 	}
 }
 
@@ -360,11 +364,9 @@ void KdAnimationComponent::Serialize(nlohmann::json& outJson) const
 		nlohmann::json obj;
 		obj["AnimationDataPath"] = anim.AnimationDataPath;
 		obj["AnimationName"] = anim.AnimationName;
-
-		//自身で追加したもの
-		obj["AnimationSpeed"] = anim.speed;
+		obj["AnimationSpeed"] = anim.speed;	//自身で追加したもの
 		obj["AnimationStartTime"] = anim.StartTime;
-		
+
 		arr.push_back(obj);
 	}
 	outJson["AnimationDatas"] = arr;

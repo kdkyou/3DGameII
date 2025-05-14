@@ -39,7 +39,14 @@ void Player::Update()
 
 	//キャラクターの前方向
 	KdVector3 vf = transform->GetWorldMatrix().Backward();
+	KdVector3 vr = transform->GetWorldMatrix().Right();
+	KdVector3 vl = transform->GetWorldMatrix().Left();
+	KdVector3 vb = transform->GetWorldMatrix().Forward();
+
 	vf.Normalize();
+	vr.Normalize();
+	vl.Normalize();
+	vb.Normalize();
 
 	m_vMoveOnce = KdVector3::Zero;
 
@@ -53,15 +60,15 @@ void Player::Update()
 	}*/
 	if (keyboard.A)
 	{
-		m_vMoveOnce.x = -1.0f;
+		m_vMoveOnce = vl * m_speed * deltaTime;
 	}
 	if (keyboard.S)
 	{
-		m_vMoveOnce.z = -1.0f;
+		m_vMoveOnce = vf * m_speed * deltaTime;
 	}
 	if (keyboard.D)
 	{
-		m_vMoveOnce.x = 1.0f;
+		m_vMoveOnce = vb * m_speed * deltaTime;
 	}
 
 	//正規化

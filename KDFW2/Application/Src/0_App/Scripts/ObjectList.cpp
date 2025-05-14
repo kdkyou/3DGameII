@@ -13,33 +13,34 @@ void ObjectList::Update()
 	//全ての有効(Enable)なオブジェクトを取得する
 	auto& enableObjects = KdFramework::GetInstance().GetScene()->GetCollectedObjects();
 
+	m_grounds.clear();
+	m_players.clear();
+	m_enemys.clear();
+
 	for (auto enable : enableObjects)
 	{
 		const auto&  checkList= enable->GetComponent<CheckList>();
 
 		if (checkList == nullptr) { continue; }
 
-		if (checkList->IsDirty() == false) { continue; }
+//		if (checkList->IsDirty() == false) { continue; }
 
 		//地形オブジェクトかどうか
 		if (checkList->IsGround() == true) 
 		{ 
-		//	m_grounds.push_back(enable); 
-			int a = 0;
+			m_grounds.push_back(enable); 
 		}
 
 		//敵かどうか
 		if (checkList->IsEnemy() == true)
 		{
-		//	m_enemys.push_back(enable);
-			int a = 0;
+			m_enemys.push_back(enable);
 		}
 
 		//プレイヤーかどうか
 		if (checkList->IsPlayer() == true) 
 		{
-		//	m_players.push_back(enable);
-			int a = 0;
+			m_players.push_back(enable);
 		}
 	}
 
@@ -52,4 +53,14 @@ void ObjectList::Editor_ImGui()
 		ImGui::Text(objs->GetName().c_str());
 	}*/
 
+}
+
+void ObjectList::Serialize(nlohmann::json& outJson) const
+{
+	KdScriptComponent::Serialize(outJson);
+}
+
+void ObjectList::Deserialize(const nlohmann::json& jsonObj)
+{
+	KdScriptComponent::Deserialize(jsonObj);
 }

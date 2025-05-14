@@ -76,7 +76,7 @@ public:
 	// 独自アニメーションデータから読み込み
 	void LoadFromAnimationDataWithDialog();					// ファイル選択ダイアログ表示
 	RuntimeAnimationData& LoadFromAnimationData(const std::string& path);
-//	RuntimeAnimationData& LoadFromAnimationData(const std::string& path,const float speed,const float startTime);
+	RuntimeAnimationData& LoadAnimation(const std::string& path,const std::string& name,const float speed,const float startTime);
 
 	// アニメーションを関連付けるモデル
 	void SetModelComponent( std::shared_ptr<KdModelRendererComponent> modelComp );

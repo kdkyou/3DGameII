@@ -37,6 +37,12 @@ public:
 	// 初期設定
 	void Initialize(const std::string& name);
 
+	//自身のshared_ptrを取得する関数
+	/*const std::shared_ptr<KdGameObject>& GetSharedThis()
+	{
+		std::shared_ptr<KdGameObject>
+	}*/
+
 	//===============================
 	//
 	// コンポーネント
