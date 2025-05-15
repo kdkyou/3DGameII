@@ -33,6 +33,8 @@ void Collision::Update()
 
 	m_wpTarget.reset();
 
+	m_lock = true;
+
 	for (auto& ray : m_rayDatas)
 	{
 		//有効無効判定
@@ -110,9 +112,10 @@ void Collision::Update()
 							if (ray.isTarget == true)
 							{
 								//対象オブジェクトの生ポインタをweak_ptrに格納
-								std::shared_ptr<KdGameObject> spObj(obj);
-								m_wpTarget = spObj;
-							//	m_wpTargetb = obj;
+							/*	std::shared_ptr<KdGameObject> spObj(obj);
+								m_wpTarget = spObj;*/
+								m_wpTargetb = obj;
+								m_lock = false;
 							}
 						}
 					}
@@ -130,10 +133,10 @@ void Collision::Update()
 							if (ray.isTarget == true)
 							{
 								//対象オブジェクトの生ポインタをweak_ptrに格納
-								std::shared_ptr<KdGameObject> spObj(obj);
-								m_wpTarget = spObj;
-							//	m_wpTargetb = obj;
-
+							/*	std::shared_ptr<KdGameObject> spObj(obj);
+								m_wpTarget = spObj;*/
+								m_wpTargetb = obj;
+								m_lock = false;
 							}
 
 						}
@@ -197,9 +200,11 @@ void Collision::Update()
 							if (ray.isTarget == true)
 							{
 								//対象オブジェクトの生ポインタをweak_ptrに格納
-								std::shared_ptr<KdGameObject> spObj(obj);
-								m_wpTarget = spObj;
-							//	m_wpTargetb = obj;
+							/*	std::shared_ptr<KdGameObject> spObj(obj);
+								m_wpTarget = spObj;*/
+								m_wpTargetb = obj;
+								m_lock = false;
+
 							}
 						}
 					}
@@ -217,9 +222,10 @@ void Collision::Update()
 							if (ray.isTarget == true)
 							{
 								//対象オブジェクトの生ポインタをweak_ptrに格納
-								std::shared_ptr<KdGameObject> spObj(obj);
-								m_wpTarget = spObj;
-							//	m_wpTargetb = obj;
+							/*	std::shared_ptr<KdGameObject> spObj(obj);
+								m_wpTarget = spObj;*/
+								m_wpTargetb = obj;
+								m_lock = false;
 
 							}
 
@@ -283,9 +289,10 @@ void Collision::Update()
 							if (ray.isTarget == true)
 							{
 								//対象オブジェクトの生ポインタをweak_ptrに格納
-								std::shared_ptr<KdGameObject> spObj(obj);
-								m_wpTarget = spObj;
-							//	m_wpTargetb = obj;
+							/*	std::shared_ptr<KdGameObject> spObj(obj);
+								m_wpTarget = spObj;*/
+								m_wpTargetb = obj;
+								m_lock = false;
 
 							}
 						}
@@ -304,9 +311,10 @@ void Collision::Update()
 							if (ray.isTarget == true)
 							{
 								//対象オブジェクトの生ポインタをweak_ptrに格納
-								std::shared_ptr<KdGameObject> spObj(obj);
-								m_wpTarget = spObj;
-							//	m_wpTargetb = obj;
+							/*	std::shared_ptr<KdGameObject> spObj(obj);
+								m_wpTarget = spObj;*/
+								m_wpTargetb = obj;
+								m_lock = false;
 
 							}
 
@@ -370,9 +378,10 @@ void Collision::Update()
 					if (sphere.isTarget == true)
 					{
 						//対象オブジェクトの生ポインタをweak_ptrに格納
-						std::shared_ptr<KdGameObject> spObj(obj);
-						m_wpTarget = spObj;
-					//	m_wpTargetb = obj;
+					/*	std::shared_ptr<KdGameObject> spObj(obj);
+								m_wpTarget = spObj;*/
+						m_wpTargetb = obj;
+						m_lock = false;
 
 					}
 				}
@@ -427,9 +436,10 @@ void Collision::Update()
 					if (sphere.isTarget == true)
 					{
 						//対象オブジェクトの生ポインタをweak_ptrに格納
-						std::shared_ptr<KdGameObject> spObj(obj);
-						m_wpTarget = spObj;
-					//	m_wpTargetb = obj;
+					/*	std::shared_ptr<KdGameObject> spObj(obj);
+								m_wpTarget = spObj;*/
+						m_wpTargetb = obj;
+						m_lock = false;
 
 					}
 				}
@@ -483,9 +493,10 @@ void Collision::Update()
 					if (sphere.isTarget == true)
 					{
 						//対象オブジェクトの生ポインタをweak_ptrに格納
-						std::shared_ptr<KdGameObject> spObj(obj);
-						m_wpTarget = spObj;
-					//	m_wpTargetb = obj;
+					/*	std::shared_ptr<KdGameObject> spObj(obj);
+								m_wpTarget = spObj;*/
+						m_wpTargetb = obj;
+						m_lock = false;
 
 					}
 				}

@@ -59,9 +59,21 @@ void KdInput::Update()
 	m_keyboardState = m_keyboard.GetState();
 	m_keyboardTracker.Update(m_keyboardState);
 
-
 	m_mouseState = m_mouse.GetState();
 	m_mouseTracker.Update(m_mouseState);
+	
+	//ƒf[ƒ^“ü—Í
+	m_keyDatas.push_back(m_keyboardState);
+	m_mouseDatas.push_back(m_mouseState);
+
+	if (m_keyDatas.size() > m_MaxDataLength)
+	{
+		m_keyDatas.erase(m_keyDatas.begin());
+	}
+	if (m_mouseDatas.size() > m_MaxDataLength)
+	{
+		m_mouseDatas.erase(m_mouseDatas.begin());
+	}
 	/*
 	if (m_mouseState.rightButton && m_mouseState.positionMode == DirectX::Mouse::MODE_RELATIVE)
 	{

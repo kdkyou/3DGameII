@@ -18,10 +18,10 @@ void Enemy::Update()
 
 	if (m_spCollision == nullptr) { return; }
 
-	std::shared_ptr<KdGameObject> spObj = m_spCollision->GetTarget().lock();
-//	auto spObj = m_spCollision->GetTargetb();
+//	std::shared_ptr<KdGameObject> spObj = m_spCollision->GetTarget().lock();
+	auto spObj = m_spCollision->GetTargetb();
 
-	if (spObj == nullptr) { return; }
+	if (spObj == NULL) { return; }
 
 	//Ž©g‚ÌˆÊ’uî•ñ‚ðŽæ“¾
 	const auto& transform = GetGameObject()->GetTransform();

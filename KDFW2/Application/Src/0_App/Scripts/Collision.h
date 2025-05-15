@@ -61,7 +61,12 @@ public:
 	//取得したターゲット情報を与える
 	const std::weak_ptr<KdGameObject>& GetTarget() { return m_wpTarget; }
 	const KdGameObject* GetTargetb() { 
-		return m_wpTargetb; }
+		if (m_lock == false)
+			return m_wpTargetb;
+
+		else
+			return NULL;
+	}
 
 private:
 
@@ -80,5 +85,6 @@ private:
 	//ターゲット取得
 	std::weak_ptr<KdGameObject> m_wpTarget;
 	KdGameObject* m_wpTargetb;
+	bool m_lock = true;
 	
 }; 

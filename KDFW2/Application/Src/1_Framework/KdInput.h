@@ -21,6 +21,9 @@ public:
 	DirectX::Keyboard& GetKeyboard() { return m_keyboard; }
 	DirectX::Keyboard::KeyboardStateTracker& GetKeyboardTracker() { return m_keyboardTracker; }
 
+	//保存された入力データ数の変更
+	void SetLength(int length) { m_MaxDataLength = length; }
+
 	void SetWindow(HWND hWnd);
 
 	void ProcessMessage(UINT message, WPARAM wParam, LPARAM lParam);
@@ -36,6 +39,10 @@ private:
 	DirectX::Keyboard::State				m_keyboardState = {};
 	DirectX::Keyboard						m_keyboard = {};
 	DirectX::Keyboard::KeyboardStateTracker m_keyboardTracker = {};
+
+	std::vector<DirectX::Keyboard::State>	m_keyDatas;
+	std::vector<DirectX::Mouse::State>	m_mouseDatas;
+	int										m_MaxDataLength = 10;
 
 //-------------------------------
 // シングルトン
