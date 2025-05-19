@@ -75,10 +75,10 @@ void Enemy::Update()
 	transform->SetLocalRotation(quat * qAdd);
 
 	//y座標の差分を考慮しない
-	difference.y = 0;
+	//difference.y = 0;
 	
 	//差分が一定以上の時移動処理開始
-	if (difference.Length() >= m_difference && rotateAng<1.0f)
+	if (difference.LengthSquared() >= m_difference && rotateAng<1.0f)
 	{	
 		//正面方向のベクトル取得
 		KdVector3 vf = transform->GetWorldMatrix().Backward();
