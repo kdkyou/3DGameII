@@ -14,6 +14,8 @@ bool KdPolygon::Initialize()
 	//シェーダーからマテリアルを作成
 	m_material = shader->CreateMaterial();
 
+	SetTexture("./Assets/Textures/Flare.png");
+
 	return true;
 }
 
@@ -27,14 +29,21 @@ void KdPolygon::Release()
 }
 
 //描画する頂点の追加
-UINT KdPolygon::AddVertex(const KdVector3& pos)
+UINT KdPolygon::AddVertex(const KdVector3& pos, const KdVector2& uv, const uint32_t& col)
 {
 	//追加
 	m_positions.push_back(pos);
+	// 5/20
+	m_uvs.push_back(uv);
+	m_colors.push_back(col);
+
 	
 	//バッファの作り直し
 	//バッファ ＝ GPUに確保したメモリの事
 	m_VB_Pos = nullptr;
+	// 5/20
+	m_VB_UV = nullptr;
+	m_VB_Color = nullptr;
 	
 	return (UINT)m_positions.size();
 }
@@ -45,6 +54,8 @@ void KdPolygon::CreateBuffers()
 	UINT vNum = (UINT)m_positions.size();
 
 	//バッファが確保されてなかったら確保
+
+	//Position
 	if (m_VB_Pos == nullptr)
 	{
 		m_VB_Pos = std::make_shared<KdBuffer>();
@@ -63,6 +74,33 @@ void KdPolygon::CreateBuffers()
 			m_VB_Pos->GetBufferSize()  	//書き込むサイズ
 		);
 	}
+
+	vNum = (UINT)m_uvs.size();
+	//UV
+	if (m_VB_UV == nullptr)
+	{
+		m_VB_UV = std::make_shared<KdBuffer>();
+		//確保
+		m_VB_UV->Create(D3D11_BIND_VERTEX_BUFFER,sizeof(KdVector2) * vNum,
+			D3D11_USAGE_DYNAMIC,0,nullptr
+		);
+
+		//書き込み
+		m_VB_UV->WriteData(m_uvs.data(),m_VB_UV->GetBufferSize());
+	}
+
+	//Color
+	vNum = (UINT)m_colors.size();
+	if (m_VB_Color == nullptr)
+	{
+		m_VB_Color = std::make_shared<KdBuffer>();
+		//確保
+		m_VB_Color->Create(D3D11_BIND_VERTEX_BUFFER,sizeof(uint32_t) * vNum
+			,D3D11_USAGE_DYNAMIC,0,nullptr);
+		//書き込み
+		m_VB_Color->WriteData(	m_colors.data(),m_VB_Color->GetBufferSize());
+
+	}
 }
 
 // 送り込んだデータを使用するようにシェーダーにセット
@@ -79,8 +117,8 @@ void KdPolygon::SetBuffers()
 	offsets.push_back(0);
 
 	//UV情報（テクスチャのどこを使うか）
-	buffers.push_back(nullptr);
-	strides.push_back(0);
+	buffers.push_back(m_VB_UV->GetBuffer().Get());
+	strides.push_back(sizeof(KdVector2));
 	offsets.push_back(0);
 
 	// Targent(接線)
@@ -94,8 +132,8 @@ void KdPolygon::SetBuffers()
 	offsets.push_back(0);
 
 	//Color
-	buffers.push_back(nullptr);
-	strides.push_back(0);
+	buffers.push_back(m_VB_Color->GetBuffer().Get());
+	strides.push_back(sizeof(uint32_t));
 	offsets.push_back(0);
 
 	//シェーダー
@@ -106,6 +144,22 @@ void KdPolygon::SetBuffers()
 		&strides[0],					//各要素のサイズ	
 		&offsets[0]						//各要素の開始位置
 	);
+
+}
+
+bool KdPolygon::SetTexture(const std::string& path)
+{
+	//テクスチャの読込(試し) 5/19追加
+	m_tex = KdResourceManager::GetInstance().
+		LoadAsset<KdTexture>(path);
+
+	if (m_tex == nullptr) {
+		return false;
+	}
+
+	m_material->SetTexture(0, 100, m_tex);
+
+	return true;
 
 }
 
