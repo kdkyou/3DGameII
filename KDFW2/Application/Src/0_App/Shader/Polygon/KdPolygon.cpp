@@ -14,7 +14,6 @@ bool KdPolygon::Initialize()
 	//シェーダーからマテリアルを作成
 	m_material = shader->CreateMaterial();
 
-	SetTexture("./Assets/Textures/Flare.png");
 
 	return true;
 }

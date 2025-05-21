@@ -274,6 +274,9 @@
     <ClInclude Include="Src\0_App\Scripts\Enemy.h">
       <Filter>0_App\Scripts</Filter>
     </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdEffectComponent.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp">
@@ -451,6 +454,9 @@
     </ClCompile>
     <ClCompile Include="Src\0_App\Scripts\Enemy.cpp">
       <Filter>0_App\Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdEffectComponent.cpp">
+      <Filter>1_Framework\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
