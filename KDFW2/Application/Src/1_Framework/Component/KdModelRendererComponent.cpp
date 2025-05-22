@@ -334,22 +334,10 @@ void KdModelRendererComponent::PreDraw()
 	KdFramework::GetInstance().m_renderingData.m_currentScreenData->m_drawList.push_back(this);
 }
 
-//追加
-#include"0_App/Shader/Polygon/KdPolygon.h"
 
 // 描画処理
 void KdModelRendererComponent::Draw(bool opaque, KdShader::PassTags passTag)
 {
-	//ポリゴンクラスが正しく動くか試し
-	KdPolygon poly;
-	poly.Initialize();
-	poly.AddVertex(KdVector3( -0.5f,-0.5f,0),KdVector2(0.0f,1.0f),0xFF0000FF);		//左下
-	poly.AddVertex(KdVector3(-0.5f,0.5f,0), KdVector2(0.0f, 0.0f), 0xFF0000FF);		//左上
-	poly.AddVertex(KdVector3(0.5f,-0.5f,0), KdVector2(1.0f, 1.0f), 0xFF0000FF);		//右下
-	poly.AddVertex(KdVector3( 0.5f,0.5f,0), KdVector2(1.0f, 0.0f), 0xFF0000FF);		//右上
-
-	poly.Draw();
-	poly.Release();
 
 
 	// ワールド行列をセット

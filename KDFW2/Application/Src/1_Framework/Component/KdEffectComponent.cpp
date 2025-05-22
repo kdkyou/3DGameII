@@ -2,6 +2,8 @@
 
 //KdPolygonの中身include
 #include"0_App/Shader/Polygon/KdPolygon.h"
+//描画するのに必要
+#include"../KdFramework.h"
 
 SetClassAssembly(KdEffectComponent, "Component");
 
@@ -35,12 +37,67 @@ void KdEffectComponent::LateUpdate()
 
 void KdEffectComponent::PreDraw()
 {
+	//このオブジェクトが有効か
+	if (IsEnable() == false) { return; }
+
+	//ビルボード処理
+	
+	// このGameObjectのTransform
+	const auto& trans = GetGameObject()->GetTransform();
+
+	// カメラの情報
+	auto camera = KdFramework::GetInstance().m_renderingData.m_currentScreenData->m_camera;
+
+	//カメラの行列
+	auto camMat = camera->GetCameraMatrix();
+	//回転成分だけを抽出
+	camMat._41 = camMat._42 = camMat._43 = 0;
+
+	// GameObjectの位置情報
+	auto pos = trans->GetLocalPosition();
+	KdMatrix posMat = KdMatrix::CreateTranslation(pos);
+
+	//行列合成
+	KdMatrix totalMat = camMat * posMat;
+
+	trans->SetLocalMatrix(totalMat);
+
+
+
+	//描画対象として登録
+	KdFramework::GetInstance().m_renderingData.m_currentScreenData->m_drawList.push_back(this);
+
+
 
 }
 
 void KdEffectComponent::Draw(bool opaque, KdShader::PassTags passTag)
 {
+	if (m_poly == nullptr) { return; }	//描画対象が居ない
+
+	// 不透明物描画で無い時(透明物である)
+	if (opaque == false) { return; }
+
+	//影要描画の時
+	if (passTag == KdShader::PassTags::ShadowCaster) { return; }
+	
+	//シェーダー
+	auto& sm = KdShaderManager::GetInstance();
+
+	// GameObjectの場所に描画
+	sm.m_cbPerDraw->EditCB().mW = GetGameObject()->GetTransform()->GetWorldMatrix();
+
+	sm.m_cbPerDraw->WriteWorkData();	//シェーダーに送り込む
+
+	// 加算合成にする
+	sm.m_bs_Add->SetToDevice();
+
+	//描画
 	m_poly->Draw();
+
+	//アルファブレンドに戻す
+	sm.m_bs_Alpha->SetToDevice();
+
 }
 
 
