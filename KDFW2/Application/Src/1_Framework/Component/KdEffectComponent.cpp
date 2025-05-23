@@ -57,8 +57,15 @@ void KdEffectComponent::PreDraw()
 	auto pos = trans->GetLocalPosition();
 	KdMatrix posMat = KdMatrix::CreateTranslation(pos);
 
+	//í«â¡ÇÃZâÒì]äpìx
+	KdMatrix zRotMat = KdMatrix::CreateRotationZ(m_zRotation * KdDeg2Rad);
+
+	//í«â¡ÇÃÉXÉPÅ[Éã
+	KdVector3 scale = { m_scale.x,m_scale.y,1.0f };
+	KdMatrix scaleMat = KdMatrix::CreateScale(scale);
+
 	//çsóÒçáê¨
-	KdMatrix totalMat = camMat * posMat;
+	KdMatrix totalMat = scaleMat* zRotMat * camMat  * posMat;
 
 	trans->SetLocalMatrix(totalMat);
 
@@ -100,9 +107,29 @@ void KdEffectComponent::Draw(bool opaque, KdShader::PassTags passTag)
 
 }
 
-
-
 void KdEffectComponent::Editor_ImGui()
 {
 	KdComponent::Editor_ImGui();
+
+	//âÒì]äpìx
+	ImGui::DragFloat(u8"âÒì]äpìx", &m_zRotation, 0.1f, 0.0f, 360.0f);
+	ImGui::DragFloat2(u8"ägèk", &m_scale.x, 0.1f, 0.1f, 10.0f);
+	
+}
+
+void KdEffectComponent::Deserialize(const nlohmann::json& jsonObj)
+{
+	KdComponent::Deserialize(jsonObj);
+	
+	KdJsonUtility::GetValue(jsonObj, "zRotate", &m_zRotation);
+	KdJsonUtility::GetArray(jsonObj, "Scale", &m_scale.x, 2);
+
+}
+
+void KdEffectComponent::Serialize(nlohmann::json& outJson) const
+{
+	KdComponent::Serialize(outJson);
+
+	outJson["zRotate"] = m_zRotation;
+	outJson["Scale"] = KdJsonUtility::CreateArray(&m_scale.x, 2);
 }

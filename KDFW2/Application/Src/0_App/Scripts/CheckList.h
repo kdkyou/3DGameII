@@ -7,8 +7,8 @@ public:
 	void Start()		override;
 	void Update()		override;
 	void LateUpdate()	override;
-	virtual void Serialize(nlohmann::json& outJson) const override;			// (保存)
 	virtual void Deserialize(const nlohmann::json& jsonObj) override;		// （読み込み）
+	virtual void Serialize(nlohmann::json& outJson) const override;			// (保存)
 	virtual void Editor_ImGui()override;													//チェックリスト用
 
 	const bool IsGround() { return m_isGround; }
