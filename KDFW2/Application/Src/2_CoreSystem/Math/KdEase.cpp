@@ -43,6 +43,9 @@ float KdEase::NextValue()
 	case Sine:
 		result = 1 - cos((per * 3.14159f) / 2);
 		break;
+
+	case OutSine:
+		result = sin((progressTime * KdPI) * 0.5f);
 	}
 
 	if (m_reverse) { result = 1 - result; }

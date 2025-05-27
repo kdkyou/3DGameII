@@ -5,9 +5,6 @@ class KdPolygon
 {
 public:
 
-	// ポリゴンに張り付けるテクスチャ 5/19追加
-	std::shared_ptr<KdTexture> m_tex = nullptr;
-	
 	bool Initialize();
 	void Release();
 	void Draw();
@@ -25,7 +22,9 @@ public:
 //	UINT GetLength() { m_positions.size(); }
 
 	//外部から画像を受け取る
-	bool SetTexture(const std::string& path);
+	bool SetTexture(const std::shared_ptr<KdTexture>& tex);
+
+	void SetColor(const std::vector<uint32_t>& color){}
 
 private:
 
@@ -36,7 +35,6 @@ private:
 	//頂点の色		5/20
 	std::vector<uint32_t> m_colors;
 
-
 	// バッファ
 	std::shared_ptr<KdBuffer> m_VB_Pos = nullptr;
 	//	5/20
@@ -46,4 +44,6 @@ private:
 	//シェーダ本体
 	std::shared_ptr<KdMaterial> m_material = nullptr;
 
+	// ポリゴンに張り付けるテクスチャ 5/19追加
+	std::shared_ptr<KdTexture> m_tex = nullptr;
 };

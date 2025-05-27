@@ -13,6 +13,15 @@
 class KdScene : public KdObject
 {
 public:
+	//プレハブファイルからGameObjectを動的生成
+	//戻り値：新しく作成したGameObject
+	//prefabFilePat：参考にするプレハブファイル
+	//parent：新しく生成されたGameObjectの親
+	//		  指定がなかったらRoot直下に作る
+	std::shared_ptr<KdGameObject>	Instantiate(
+		const std::string& prefabFilePath,
+		std::shared_ptr<KdGameObject> parent = nullptr
+	);
 
 	// Root GameObjectを取得
 	std::shared_ptr<KdGameObject> GetRootObject() { return m_rootObject; }

@@ -6,7 +6,7 @@ class KdEase
 {
 public:
 	// •Ï‰»•û–@
-	enum Type { Straight, Sine };
+	enum Type { Straight, Sine,OutSine};
 
 	KdEase() {}
 	KdEase(Type t, float d) { Start(t, d); }

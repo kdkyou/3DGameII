@@ -4,6 +4,37 @@
 
 #include "Editor/KdEditorData.h"
 
+std::shared_ptr<KdGameObject> KdScene::Instantiate(const std::string& prefabFilePath, std::shared_ptr<KdGameObject> parent)
+{
+	std::shared_ptr<KdGameObject> newObject = nullptr;
+
+	auto newParent = parent;
+	if (newParent == nullptr)
+	{
+		//指定がなければRootを親にする
+		newParent = m_rootObject;
+	}
+
+	//プレハブファイルの読込
+	//ResourceManagerに移行予定
+	std::ifstream ifs (prefabFilePath);
+	if (ifs.fail() == false)
+	{
+		//読み込んだデータをJsonデータに展開
+		nlohmann::json serial;
+		ifs >> serial;
+
+		//GameObject作成
+		newObject = std::make_shared<KdGameObject>();
+		newObject->Deserialize(serial);
+
+		//親の指定
+		newObject->SetParent(newParent, false);
+	}
+
+	return newObject;
+}
+
 void KdScene::Deserialize(const nlohmann::json& jsonObj)
 {
 	//-------------------
@@ -174,8 +205,58 @@ void KdScene::Editor_ImGui()
 					// Prefab保存
 					if (ImGui::Selectable(u8"Prefabファイル保存"))
 					{
+						//選択しているGameObjectのシリアライズ
+						nlohmann::json serial = nlohmann::json::object();
+						gameObj->Serialize(serial);
+
+						//ファイルとして出力
+						std::string saveFilePath = "";
+						if (KdEditorData::GetInstance().SaveFileDialog(saveFilePath, 
+										"Prefabファイル保存", "Prefabファイル\0*.kdprefab\0"))
+						{
+							std::ofstream ofs(saveFilePath);
+							//失敗しているとtrueが帰ってくる
+							if (ofs.fail() == false) 
+							{
+								//Jsonを文字列として保存s
+								std::string str = serial.dump();
+								ofs.write ( str.c_str(), str.size() );
+							}
+							ofs.close();
+						}
 
 					}
+
+					//Prefab読み込み
+					if (ImGui::Selectable(u8"Prefabファイル読込"))
+					{
+						
+						std::string openFilePath = "";
+						if (KdEditorData::GetInstance().OpenFileDialog(
+							openFilePath,"Prefabファイルを開く","Prefabファイル\0*.kdprefab\0" ) )
+						{
+							//ファイルが選択された
+							int i = 0;
+							std::ifstream ifs(openFilePath);
+							if (ifs.fail() == false)
+							{
+								nlohmann::json serial;
+								ifs >> serial;	//文字列から読み込んでJsonデータに展開
+
+								//展開先は新しいGameObject
+								auto newObj = std::make_shared<KdGameObject>();
+								newObj->Deserialize(serial);
+
+								//選択(右クリック)されたオブジェクトを親にする
+								newObj->SetParent(gameObj, false);
+
+								//新しくできたGameObjectを選択する
+								KdEditorData::GetInstance().SelectObj = newObj;
+							}
+						}
+					}
+
+
 
 					ImGui::Separator();
 

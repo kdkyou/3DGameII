@@ -121,14 +121,19 @@ void Player::Update()
 		if (keyboard.K)
 		{
 			m_animation->Play("Attack", 22.0f);
-		}
 
-		//強パンチ(アニメーション遅め)
-		if (keyboard.L)
-		{
-			m_animation->Play("Attack", 11.0f);
-		}
+			//エフェクト発生!!
+			auto effect = KdFramework::GetInstance().GetScene()->Instantiate(
+				"./Assets/Prefabs/Slash.kdprefab",
+				nullptr		//エフェクトは置いてくる
+			);
+			auto pos = transform->GetLocalPosition();
+			pos.y += 1.0f;
+			pos.x += 0.3f;
 
+			//エフェクトをプレイヤーの位置に移動
+			effect->GetTransform()->SetLocalPosition(pos);
+		}
 	}
 
 

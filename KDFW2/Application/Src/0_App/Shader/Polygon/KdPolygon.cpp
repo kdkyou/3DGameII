@@ -15,6 +15,7 @@ bool KdPolygon::Initialize()
 	m_material = shader->CreateMaterial();
 
 
+
 	return true;
 }
 
@@ -25,6 +26,19 @@ void KdPolygon::Release()
 	m_VB_Pos = nullptr;
 
 	m_positions.clear();
+
+	m_VB_UV = nullptr;
+	
+	m_uvs.clear();
+
+	m_VB_Color = nullptr;
+
+	m_colors.clear();
+
+	//テクスチャの破棄
+	m_tex = nullptr;
+
+
 }
 
 //描画する頂点の追加
@@ -146,17 +160,19 @@ void KdPolygon::SetBuffers()
 
 }
 
-bool KdPolygon::SetTexture(const std::string& path)
+bool KdPolygon::SetTexture(const std::shared_ptr<KdTexture>& tex)
 {
-	//テクスチャの読込(試し) 5/19追加
-	m_tex = KdResourceManager::GetInstance().
-		LoadAsset<KdTexture>(path);
-
-	if (m_tex == nullptr) {
+	// テクスチャをセットするマテリアルがあるか
+	if (m_material == nullptr)
+	{
 		return false;
 	}
 
-	m_material->SetTexture(0, 100, m_tex);
+	//マテリアルのカラーテクスチャに設定
+	m_material->SetTexture(0, 100, tex);
+
+	//クラス内の変数に覚えておく
+	m_tex = tex;
 
 	return true;
 
