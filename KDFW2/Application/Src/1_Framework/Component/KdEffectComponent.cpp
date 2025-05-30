@@ -119,7 +119,7 @@ void KdEffectComponent::Draw(bool opaque, KdShader::PassTags passTag)
 	sm.m_bs_Add->SetToDevice();
 
 	//描画
-	m_poly->Draw();
+	m_poly->Draw(KdPolygon::DrawType::fill);
 
 	//アルファブレンドに戻す
 	sm.m_bs_Alpha->SetToDevice();

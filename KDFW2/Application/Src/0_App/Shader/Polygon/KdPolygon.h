@@ -5,9 +5,18 @@ class KdPolygon
 {
 public:
 
+	enum DrawType {
+		//面を埋める
+		fill  = D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP,
+		//	輪郭線（辺）だけを描画
+		line  = D3D_PRIMITIVE_TOPOLOGY_LINESTRIP,
+
+	};
+
 	bool Initialize();
 	void Release();
-	void Draw();
+	//void Draw();
+	void Draw(DrawType drawType = DrawType::fill);
 
 	//描画する頂点の座標とUVとColorを追加
 	UINT AddVertex(const KdVector3& pos,const KdVector2& uv, const uint32_t& col= 0xFFFFFFFF);

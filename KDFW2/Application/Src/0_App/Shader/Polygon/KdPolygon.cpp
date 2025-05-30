@@ -41,6 +41,44 @@ void KdPolygon::Release()
 
 }
 
+void KdPolygon::Draw(DrawType drawType)
+{
+	if (m_material == nullptr) { return; }
+
+	//頂点数
+	uint32_t vertexNum = (uint32_t)m_positions.size();
+
+	//面として成立していない
+	if (vertexNum < 3) { return; }
+
+	//バッファの作成（作っていなかった時のみ）
+	CreateBuffers();
+
+	//作ったバッファをシェーダーにセットする
+	SetBuffers();
+
+	// Colorテクスチャがセットされていなかったら
+	if (m_tex == nullptr)
+	{
+		// 白テクスチャのセット
+		SetTexture(D3D.GetDotWhiteTex());
+	}
+	
+	//シェーダーをセット
+	m_material->SetToDevice(0);
+
+	//プリミティブトポロジーのセット
+	//頂点の結び方
+	D3D.GetDevContext()->IASetPrimitiveTopology(
+		(D3D11_PRIMITIVE_TOPOLOGY)drawType);
+
+	//描画コール
+	D3D.GetDevContext()->Draw(
+		vertexNum,	//描画する頂点数
+		0			//開始位置
+	);
+}
+
 //描画する頂点の追加
 UINT KdPolygon::AddVertex(const KdVector3& pos, const KdVector2& uv, const uint32_t& col)
 {
@@ -178,34 +216,34 @@ bool KdPolygon::SetTexture(const std::shared_ptr<KdTexture>& tex)
 
 }
 
-void KdPolygon::Draw()
-{
-	if (m_material == nullptr) { return; }
-
-	//頂点数
-	uint32_t vertexNum = (uint32_t)m_positions.size();
-
-	//面として成立していない
-	if (vertexNum < 3) { return; }
-
-	//バッファの作成（作っていなかった時のみ）
-	CreateBuffers();
-
-	//作ったバッファをシェーダーにセットする
-	SetBuffers();
-
-	//シェーダーをセット
-	m_material->SetToDevice(0);
-
-	//プリミティブトポロジーのセット
-	//頂点の結び方
-	D3D.GetDevContext()->IASetPrimitiveTopology(
-		D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-
-	//描画コール
-	D3D.GetDevContext()->Draw(
-		vertexNum,	//描画する頂点数
-		0			//開始位置
-	);
-
-}
+//void KdPolygon::Draw()
+//{
+//	if (m_material == nullptr) { return; }
+//
+//	//頂点数
+//	uint32_t vertexNum = (uint32_t)m_positions.size();
+//
+//	//面として成立していない
+//	if (vertexNum < 3) { return; }
+//
+//	//バッファの作成（作っていなかった時のみ）
+//	CreateBuffers();
+//
+//	//作ったバッファをシェーダーにセットする
+//	SetBuffers();
+//
+//	//シェーダーをセット
+//	m_material->SetToDevice(0);
+//
+//	//プリミティブトポロジーのセット
+//	//頂点の結び方
+//	D3D.GetDevContext()->IASetPrimitiveTopology(
+//		D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
+//
+//	//描画コール
+//	D3D.GetDevContext()->Draw(
+//		vertexNum,	//描画する頂点数
+//		0			//開始位置
+//	);
+//
+//}
