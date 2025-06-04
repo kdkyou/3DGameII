@@ -4,21 +4,6 @@
 //フレームワークにコンポーネントであることを登録
 SetClassAssembly(CheckList, "Component");
 
-void CheckList::Start()
-{
-}
-
-void CheckList::Update()
-{
-	m_isPlayer;
-	m_isGround;
-	m_isEnemy;
-}
-
-void CheckList::LateUpdate()
-{
-}
-
 void CheckList::Serialize(nlohmann::json& outJson) const
 {
 	KdComponent::Serialize(outJson);

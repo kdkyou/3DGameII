@@ -64,11 +64,11 @@ void Player::Update()
 	}
 	if (keyboard.S)
 	{
-		m_vMoveOnce = vf * m_speed * deltaTime;
+		m_vMoveOnce = vb * m_speed * deltaTime;
 	}
 	if (keyboard.D)
 	{
-		m_vMoveOnce = vb * m_speed * deltaTime;
+		m_vMoveOnce = vr * m_speed * deltaTime;
 	}
 
 	//ê≥ãKâª

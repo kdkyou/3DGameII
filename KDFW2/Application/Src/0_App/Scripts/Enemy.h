@@ -6,9 +6,9 @@ class Enemy :public KdScriptComponent
 {
 public:
 
-	void Start() override;
-	void Update()override;
-	void LateUpdate()	override;
+	virtual void Start() override;
+	virtual void Update()override;
+	virtual void LateUpdate()	override;
 
 
 	// このクラスの内容をJSONデータ化する(保存)

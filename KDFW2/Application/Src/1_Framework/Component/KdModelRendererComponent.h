@@ -154,6 +154,10 @@ class KdModelRendererComponent : public KdRendererComponent
 {
 public:
 
+	// ノード名から特定のノードインデックスを返す
+	int GetNodeIndexFromName(const std::string& nodeName)const;
+
+
 	void Load();
 
 	void SetMode(const std::shared_ptr<KdModel>& model);
@@ -244,12 +248,13 @@ public:
 
 	const std::shared_ptr<KdModel> GetSourceModel() const {return m_sourceModel;}
 
+
 private:
 
 	// モデルデータ
 	std::shared_ptr<KdModel>					m_sourceModel;
 
-	// 全ノードリスト
+	// 全ノード座標リスト
 	std::vector<KdTransform>					m_allNodeTransforms;
 
 	// アニメーションしたTransform(毎回nullクリア)

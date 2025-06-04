@@ -235,6 +235,15 @@ void KdMeshRenderer::Editor_ImGui()
 }
 #endif
 
+int KdModelRendererComponent::GetNodeIndexFromName(const std::string& nodeName) const
+{
+	int index = 0;
+
+
+
+	return index;
+}
+
 void KdModelRendererComponent::Load()
 {
 	std::string filepath;

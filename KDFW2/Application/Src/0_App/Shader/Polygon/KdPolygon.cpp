@@ -21,18 +21,17 @@ bool KdPolygon::Initialize()
 
 void KdPolygon::Release()
 {
-	m_material = nullptr;
+	//描画ができなくなるので一旦解放なし
+//	m_material = nullptr;
 
 	m_VB_Pos = nullptr;
-
 	m_positions.clear();
 
+	//追加済みか？
 	m_VB_UV = nullptr;
-	
 	m_uvs.clear();
 
 	m_VB_Color = nullptr;
-
 	m_colors.clear();
 
 	//テクスチャの破棄
@@ -48,8 +47,10 @@ void KdPolygon::Draw(DrawType drawType)
 	//頂点数
 	uint32_t vertexNum = (uint32_t)m_positions.size();
 
-	//面として成立していない
-	if (vertexNum < 3) { return; }
+	// 面として成立していない
+	// 線も描画するために条件変更
+	//if (vertexNum < 3) { return; }
+	if (vertexNum < 2) { return; }
 
 	//バッファの作成（作っていなかった時のみ）
 	CreateBuffers();

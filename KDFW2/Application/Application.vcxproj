@@ -176,6 +176,7 @@
     <ClInclude Include="Src\1_Framework\Component\KdComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdEffectComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdLightComponent.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdNodeConstraint.h" />
     <ClInclude Include="Src\1_Framework\Component\KdPrimitiveRenderer.h" />
     <ClInclude Include="Src\1_Framework\Component\KdScriptComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdTransformComponent.h" />
@@ -245,6 +246,7 @@
     <ClCompile Include="Src\1_Framework\Component\KdComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdEffectComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdLightComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdNodeConstraint.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdPrimitiveRenderer.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdScriptComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdTransformComponent.cpp" />

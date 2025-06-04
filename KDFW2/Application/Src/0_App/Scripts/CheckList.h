@@ -4,9 +4,10 @@ class CheckList : public KdScriptComponent
 {
 public:
 
-	void Start()		override;
-	void Update()		override;
-	void LateUpdate()	override;
+	void Start() override{}
+	void Update()override{}
+	void LateUpdate()	override{}
+
 	virtual void Deserialize(const nlohmann::json& jsonObj) override;		// （読み込み）
 	virtual void Serialize(nlohmann::json& outJson) const override;			// (保存)
 	virtual void Editor_ImGui()override;													//チェックリスト用
