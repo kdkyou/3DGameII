@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreSystem.h"
+#include "GamePad.h"
 
 //===========================================
 // 
@@ -39,6 +40,12 @@ private:
 	DirectX::Keyboard::State				m_keyboardState = {};
 	DirectX::Keyboard						m_keyboard = {};
 	DirectX::Keyboard::KeyboardStateTracker m_keyboardTracker = {};
+
+	DirectX::GamePad::State					m_gamepadState = {};
+	DirectX::GamePad						m_gamepad = {};
+	//DirectX::GamePad::GamePadStateTracker  m_gamepadTracker = {};
+
+	
 
 	std::vector<DirectX::Keyboard::State>	m_keyDatas;
 	std::vector<DirectX::Mouse::State>	m_mouseDatas;

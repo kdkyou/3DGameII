@@ -283,6 +283,9 @@
     <ClInclude Include="Src\1_Framework\Component\KdNodeConstraint.h">
       <Filter>1_Framework\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdMovableObject.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp">
@@ -468,6 +471,9 @@
       <Filter>1_Framework\Component</Filter>
     </ClCompile>
     <ClCompile Include="Src\1_Framework\Component\KdNodeConstraint.cpp">
+      <Filter>1_Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdMovableObject.cpp">
       <Filter>1_Framework\Component</Filter>
     </ClCompile>
   </ItemGroup>

@@ -25,11 +25,11 @@ void Enemy::Update()
 
 	//自身の位置情報を取得
 	const auto& transform = GetGameObject()->GetTransform();
-	auto pos = transform->GetLocalPosition();
+	auto pos = transform->GetPosition();
 
 	//対象の位置情報を取得
 	const auto& targetTrans = spObj->GetTransform();
-	auto targetPos = targetTrans->GetLocalPosition();
+	auto targetPos = targetTrans->GetPosition();
 
 	//差分を計算
 	auto difference = targetPos - pos;

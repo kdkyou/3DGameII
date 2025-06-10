@@ -235,13 +235,42 @@ void KdMeshRenderer::Editor_ImGui()
 }
 #endif
 
+
+// 名前からノードのIndexを取得する
+// 存在しなかったら-1が返る
 int KdModelRendererComponent::GetNodeIndexFromName(const std::string& nodeName) const
 {
-	int index = 0;
+	if (nodeName == "") { return -1; }
 
+	// まだモデルが読み込まれてなかった
+	if (m_sourceModel == nullptr) { return -1; }
+	// 全てのノードを検索
+	for (auto& node : m_sourceModel->GetAllNodes())
+	{
+		if (node.NodeName == nodeName)
+		{
+			return node.NodeIndex;
+		}
+	}
 
+	return -1; // 見つからなかった
+}
 
-	return index;
+KdTransform* KdModelRendererComponent::GetNodeTransformFromIndex(int index)
+{
+	//範囲外
+	if (index >= m_allNodeTransforms.size()) { return nullptr; }
+	if (index <= 0) { return nullptr; }
+
+	// アニメーション時はm_animatedTransformを返す
+	if (m_animatedTransform.expired() == false)
+	{
+		auto allnodeTrans = m_animatedTransform.lock().get();
+		return &(*allnodeTrans)[index];
+	}
+	else
+		return &m_allNodeTransforms[index];
+
 }
 
 void KdModelRendererComponent::Load()

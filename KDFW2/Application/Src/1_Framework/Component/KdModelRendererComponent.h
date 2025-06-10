@@ -156,6 +156,9 @@ public:
 
 	// ノード名から特定のノードインデックスを返す
 	int GetNodeIndexFromName(const std::string& nodeName)const;
+	// ノードIndexからTransformの取得
+	KdTransform* GetNodeTransformFromIndex(int index);
+
 
 
 	void Load();

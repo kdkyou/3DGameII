@@ -33,7 +33,7 @@ void Collision::Update()
 
 	m_wpTarget.reset();
 
-	m_lock = true;
+	m_isTarget = false;
 
 	for (auto& ray : m_rayDatas)
 	{
@@ -115,7 +115,7 @@ void Collision::Update()
 							/*	std::shared_ptr<KdGameObject> spObj(obj);
 								m_wpTarget = spObj;*/
 								m_wpTargetb = obj;
-								m_lock = false;
+								m_isTarget = true;
 							}
 						}
 					}
@@ -136,7 +136,7 @@ void Collision::Update()
 							/*	std::shared_ptr<KdGameObject> spObj(obj);
 								m_wpTarget = spObj;*/
 								m_wpTargetb = obj;
-								m_lock = false;
+								m_isTarget = true;
 							}
 
 						}
@@ -192,6 +192,7 @@ void Collision::Update()
 						//
 						if (hit)
 						{
+							
 							m_spGravity->Ground();
 							pos.y += (ray.correction.y + fallDist) - hitResult.Distance;
 							transform->SetPosition(pos);
@@ -203,8 +204,7 @@ void Collision::Update()
 							/*	std::shared_ptr<KdGameObject> spObj(obj);
 								m_wpTarget = spObj;*/
 								m_wpTargetb = obj;
-								m_lock = false;
-
+								m_isTarget = true;
 							}
 						}
 					}
@@ -225,8 +225,7 @@ void Collision::Update()
 							/*	std::shared_ptr<KdGameObject> spObj(obj);
 								m_wpTarget = spObj;*/
 								m_wpTargetb = obj;
-								m_lock = false;
-
+								m_isTarget = true;
 							}
 
 						}
@@ -292,8 +291,7 @@ void Collision::Update()
 							/*	std::shared_ptr<KdGameObject> spObj(obj);
 								m_wpTarget = spObj;*/
 								m_wpTargetb = obj;
-								m_lock = false;
-
+								m_isTarget = true;
 							}
 						}
 					}
@@ -314,8 +312,7 @@ void Collision::Update()
 							/*	std::shared_ptr<KdGameObject> spObj(obj);
 								m_wpTarget = spObj;*/
 								m_wpTargetb = obj;
-								m_lock = false;
-
+								m_isTarget = true;
 							}
 
 						}
@@ -330,9 +327,9 @@ void Collision::Update()
 	}
 	//<----------------------下向きのレイ判定(着地判定)
 
+	//横向きの当たり判定(着地判定)---------------------->
 	for (auto& sphere : m_sphereDatas)
 	{
-		//横向きの当たり判定(着地判定)---------------------->
 		// 球体メッシュの当たり判定
 		KdVector3 vCenter = pos;	//球の中心座標
 		vCenter += sphere.center;	//少しもち上げる
@@ -369,20 +366,22 @@ void Collision::Update()
 
 					bool hit = KdSphereToMesh(vCenter, sphere.radius, *node.Mesh, mat, hitResult);
 
-					if (hit && sphere.isResult)
+					if (hit)
 					{
+						if (sphere.isResult==true)
+						{
 						//移動した結果から元の位置を引く 差し戻し分を累積
 						sphere.vPushBack += (vMove - vCenter);
-					}
+						}
 
-					if (sphere.isTarget == true)
-					{
-						//対象オブジェクトの生ポインタをweak_ptrに格納
-					/*	std::shared_ptr<KdGameObject> spObj(obj);
-								m_wpTarget = spObj;*/
-						m_wpTargetb = obj;
-						m_lock = false;
-
+						if (sphere.isTarget == true)
+						{
+							//対象オブジェクトの生ポインタをweak_ptrに格納
+						/*	std::shared_ptr<KdGameObject> spObj(obj);
+									m_wpTarget = spObj;*/
+							m_wpTargetb = obj;
+							m_isTarget = true;
+						}
 					}
 				}
 
@@ -427,20 +426,22 @@ void Collision::Update()
 
 					bool hit = KdSphereToMesh(vCenter, sphere.radius, *node.Mesh, mat, hitResult);
 
-					if (hit && sphere.isResult)
+					if (hit)
 					{
-						//移動した結果から元の位置を引く 差し戻し分を累積
-						sphere.vPushBack += (vMove - vCenter);
-					}
+						if (sphere.isResult == true)
+						{
+							//移動した結果から元の位置を引く 差し戻し分を累積
+							sphere.vPushBack += (vMove - vCenter);
+						}
 
-					if (sphere.isTarget == true)
-					{
-						//対象オブジェクトの生ポインタをweak_ptrに格納
-					/*	std::shared_ptr<KdGameObject> spObj(obj);
-								m_wpTarget = spObj;*/
-						m_wpTargetb = obj;
-						m_lock = false;
-
+						if (sphere.isTarget == true)
+						{
+							//対象オブジェクトの生ポインタをweak_ptrに格納
+						/*	std::shared_ptr<KdGameObject> spObj(obj);
+									m_wpTarget = spObj;*/
+							m_wpTargetb = obj;
+							m_isTarget = true;
+						}
 					}
 				}
 
@@ -484,20 +485,22 @@ void Collision::Update()
 
 					bool hit = KdSphereToMesh(vCenter, sphere.radius, *node.Mesh, mat, hitResult);
 
-					if (hit && sphere.isResult)
+					if (hit)
 					{
-						//移動した結果から元の位置を引く 差し戻し分を累積
-						sphere.vPushBack += (vMove - vCenter);
-					}
+						if (sphere.isResult == true)
+						{
+							//移動した結果から元の位置を引く 差し戻し分を累積
+							sphere.vPushBack += (vMove - vCenter);
+						}
 
-					if (sphere.isTarget == true)
-					{
-						//対象オブジェクトの生ポインタをweak_ptrに格納
-					/*	std::shared_ptr<KdGameObject> spObj(obj);
-								m_wpTarget = spObj;*/
-						m_wpTargetb = obj;
-						m_lock = false;
-
+						if (sphere.isTarget == true)
+						{
+							//対象オブジェクトの生ポインタをweak_ptrに格納
+						/*	std::shared_ptr<KdGameObject> spObj(obj);
+									m_wpTarget = spObj;*/
+							m_wpTargetb = obj;
+							m_isTarget = true;
+						}
 					}
 				}
 			}
