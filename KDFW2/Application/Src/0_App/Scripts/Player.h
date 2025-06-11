@@ -1,7 +1,8 @@
 #pragma once
 
-//プレイヤーを制御するコンポーネント
+class Collision;
 
+//プレイヤーを制御するコンポーネント
 class Player :public KdScriptComponent
 {
 public:
@@ -23,11 +24,16 @@ public:
 
 private:
 
+	// 現在Playerが上に乗っているオブジェクト
+	KdGameObject* m_ridingObject = nullptr;
+
 	float m_speed=1.0f;
 	
 	//キャラクターの一回の移動量
 	KdVector3 m_vMoveOnce = {};
 
+
+	std::shared_ptr<Collision> m_spCollision = nullptr;
 
 	//アニメーション関係
 	std::shared_ptr<KdAnimationComponent> m_animation = nullptr;

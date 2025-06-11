@@ -1,5 +1,8 @@
 #include"KdFramework.h"
 #include"Player.h"
+#include"Collision.h"
+
+#include"../../1_Framework/Component/KdMoveRecorder.h"
 
 //フレームワークにコンポーネントであることを登録
 SetClassAssembly(Player, "Component");
@@ -8,6 +11,7 @@ void Player::Start()
 {
 	m_animation = GetGameObject()->
 		GetComponent<KdAnimationComponent>();
+	m_spCollision = GetGameObject()->GetComponent<Collision>();
 }
 
 void Player::Update()
@@ -139,6 +143,22 @@ void Player::Update()
 
 	//当たり判定
 //	CollisionPhase();
+
+	// 乗っている
+	m_ridingObject = m_spCollision->GetTargetb();
+	if (m_ridingObject != nullptr)
+	{
+		auto moveRec = m_ridingObject->GetComponent<KdMoveRecorder>();
+
+		if (moveRec != nullptr)
+		{
+			//移動物の一回の移動量を自分に適用
+			auto& diff = moveRec->GetDifference();
+			GetGameObject()->GetTransform()->SetWorldMatrix(
+				GetGameObject()->GetTransform()->GetWorldMatrix() * diff
+			);
+		}
+	}
 
 }
 

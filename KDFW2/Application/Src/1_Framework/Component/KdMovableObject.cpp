@@ -17,7 +17,7 @@ void KdMovableObject::Update()
 
 	if (m_wayPoints.size() < 2) { return;}
 
-	if (m_wayNum >= m_wayPoints.size() - 1)
+	if (m_wayNum > m_wayPoints.size() - 2)
 	{
 		//
 		m_wayNum = m_wayPoints.size() - 2;
@@ -33,7 +33,7 @@ void KdMovableObject::Update()
 
 
 	//現在の進行具合の計算
-	float p = m_duration / (m_oneMoveTime / m_wayPoints.size() ); // 0-1
+	float p = m_duration / (m_oneMoveTime / m_wayPoints.size() -1 ); // 0-1
 	float wp = m_waitduration / m_waitTime;
 
 	static bool endFlg = false;
@@ -208,6 +208,7 @@ void KdMovableObject::Set()
 	m_moveObject.reset();
 	m_start.reset();
 	m_end.reset();
+	m_wayPoints.clear();
 
 	// 子どもたちの取得
 	auto children = GetGameObject()->GetChildren();

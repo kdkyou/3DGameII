@@ -61,12 +61,12 @@ public:
 	//取得したターゲット情報を与える
 	const std::weak_ptr<KdGameObject>& GetTarget() { return m_wpTarget; }
 
-	const KdGameObject* GetTargetb() { 
+	KdGameObject* GetTargetb() { 
 		if (m_isTarget == true)
 			return m_wpTargetb;
 
 		else
-			return NULL;
+			return nullptr;
 	}
 
 private:

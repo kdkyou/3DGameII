@@ -33,6 +33,9 @@ void Collision::Update()
 
 	m_wpTarget.reset();
 
+	//上に乗っているオブジェクトクリア
+	m_wpTargetb = nullptr;
+
 	m_isTarget = false;
 
 	for (auto& ray : m_rayDatas)
@@ -111,7 +114,7 @@ void Collision::Update()
 
 							if (ray.isTarget == true)
 							{
-								//対象オブジェクトの生ポインタをweak_ptrに格納
+								//対象オブジェクトの生ポインタを格納
 							/*	std::shared_ptr<KdGameObject> spObj(obj);
 								m_wpTarget = spObj;*/
 								m_wpTargetb = obj;

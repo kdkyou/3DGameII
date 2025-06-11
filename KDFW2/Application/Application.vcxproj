@@ -177,6 +177,7 @@
     <ClInclude Include="Src\1_Framework\Component\KdEffectComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdLightComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdMovableObject.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdMoveRecorder.h" />
     <ClInclude Include="Src\1_Framework\Component\KdNodeConstraint.h" />
     <ClInclude Include="Src\1_Framework\Component\KdPrimitiveRenderer.h" />
     <ClInclude Include="Src\1_Framework\Component\KdScriptComponent.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="Src\1_Framework\Component\KdEffectComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdLightComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdMovableObject.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdMoveRecorder.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdNodeConstraint.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdPrimitiveRenderer.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdScriptComponent.cpp" />
