@@ -210,6 +210,8 @@ public:
 		DepthOnly = 2,			// 深度描画のみ
 
 		// 自由に追加・変更してください
+		Sprite  = 3,			// UI用2D描画
+
 	};
 
 protected:

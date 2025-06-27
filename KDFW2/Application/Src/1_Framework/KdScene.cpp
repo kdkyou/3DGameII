@@ -35,6 +35,41 @@ std::shared_ptr<KdGameObject> KdScene::Instantiate(const std::string& prefabFile
 	return newObject;
 }
 
+// 再帰検索用の関数
+void RecFindObjectWithGuid(
+		std::shared_ptr<KdGameObject>& out,		// 出力用
+		std::shared_ptr<KdGameObject>& parent,	// 検索開始位置
+		const std::string& guid					// 比較するGuid
+	)
+{
+
+	// 自分自身が対象か
+	if (parent->GetGuid() == guid) { 
+		out = parent;
+	}
+	// 子どもたちを検索
+	else
+	{
+		// 再帰呼び出し
+		for (auto c : parent->GetChildren())
+		{
+			RecFindObjectWithGuid(out, c, guid);
+		}
+	}
+
+}
+
+// 指定されたGuidに合致するオブジェクトを返す
+std::shared_ptr<KdGameObject> KdScene::FindObjectWithGuid(const std::string& guidStr)
+{
+	std::shared_ptr<KdGameObject> ret = nullptr;
+
+	// rootから全員分探していく
+	RecFindObjectWithGuid(ret, m_rootObject, guidStr);
+
+	return ret;
+}
+
 void KdScene::Deserialize(const nlohmann::json& jsonObj)
 {
 	//-------------------

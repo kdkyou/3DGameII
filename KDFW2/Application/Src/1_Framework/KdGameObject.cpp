@@ -5,7 +5,7 @@
 
 #include "Component/KdComponent.h"
 #include "Component/KdTransformComponent.h"
-
+#include "Editor/KdEditorData.h"
 
 
 void KdGameObject::Initialize(const std::string& name)
@@ -196,7 +196,14 @@ void KdGameObject::Serialize(nlohmann::json& outJson) const
 
 void KdGameObject::Editor_ImGui()
 {
+	// GUID
 	ImGui::Text(m_guid.ToString().c_str());
+	// GUIDのコピーボタン
+	if (ImGui::Button(u8"GUIDのコピー"))
+	{
+		KdEditorData::GetInstance().Clipboard = m_guid.ToString();
+		//ImGui::SetClipboardText(m_guid.ToString().c_str());
+	}
 
 	// 有効フラグ
 	ImGui::Checkbox("Enable", &m_enable);

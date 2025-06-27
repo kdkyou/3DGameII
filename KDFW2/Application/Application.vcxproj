@@ -175,6 +175,7 @@
     <ClInclude Include="Src\1_Framework\Component\KdCameraComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdEffectComponent.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdImage.h" />
     <ClInclude Include="Src\1_Framework\Component\KdLightComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdMovableObject.h" />
     <ClInclude Include="Src\1_Framework\Component\KdMoveRecorder.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="Src\1_Framework\Component\KdScriptComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdTransformComponent.h" />
     <ClInclude Include="Src\1_Framework\Component\KdModelRendererComponent.h" />
+    <ClInclude Include="Src\1_Framework\Component\KdTransformConstraint.h" />
     <ClInclude Include="Src\1_Framework\Editor\ImGuiHelper.h" />
     <ClInclude Include="Src\1_Framework\Editor\KdEditorData.h" />
     <ClInclude Include="Src\1_Framework\imgui\imgui.h" />
@@ -247,6 +249,7 @@
     <ClCompile Include="Src\1_Framework\Component\KdCameraComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdEffectComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdImage.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdLightComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdMovableObject.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdMoveRecorder.cpp" />
@@ -255,6 +258,7 @@
     <ClCompile Include="Src\1_Framework\Component\KdScriptComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdTransformComponent.cpp" />
     <ClCompile Include="Src\1_Framework\Component\KdModelRendererComponent.cpp" />
+    <ClCompile Include="Src\1_Framework\Component\KdTransformConstraint.cpp" />
     <ClCompile Include="Src\1_Framework\Editor\ImGuiHelper.cpp" />
     <ClCompile Include="Src\1_Framework\Editor\KdEditorData.cpp" />
     <ClCompile Include="Src\1_Framework\imgui\imgui.cpp" />

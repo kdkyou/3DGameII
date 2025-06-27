@@ -22,9 +22,35 @@ void KdMovableObject::Update()
 		//
 		m_wayNum = m_wayPoints.size() - 2;
 	}
+	else if (m_wayNum < 1) {
+		m_wayNum = 1;
+	}
+
+	static bool endFlg = false;
 	
-	m_start = m_wayPoints[m_wayNum];
-	m_end = m_wayPoints[m_wayNum+1];
+	if (m_roundTrip == false)
+	{
+		if (m_wayNum > m_wayPoints.size() - 2)
+		{
+			m_wayNum = 0;
+		}
+
+		m_start = m_wayPoints[m_wayNum];
+		m_end = m_wayPoints[m_wayNum + 1];
+	}
+	else
+	{
+		if (endFlg == false)
+		{
+			m_start = m_wayPoints[m_wayNum];
+			m_end = m_wayPoints[m_wayNum + 1];
+		}
+		else
+		{
+			m_start = m_wayPoints[m_wayNum+1];
+			m_end = m_wayPoints[m_wayNum];
+		}
+	}
 
 	// 各オブジェクトの確保
 	auto moveObj = m_moveObject.lock();
@@ -33,10 +59,9 @@ void KdMovableObject::Update()
 
 
 	//現在の進行具合の計算
-	float p = m_duration / (m_oneMoveTime / m_wayPoints.size() -1 ); // 0-1
+	float p = m_duration / m_oneMoveTime ; // 0-1
 	float wp = m_waitduration / m_waitTime;
 
-	static bool endFlg = false;
 
 	//往復しない場合
 	if (m_roundTrip == false)
@@ -64,6 +89,7 @@ void KdMovableObject::Update()
 	// 往復する場合
 	else
 	{
+		//行き
 		if (endFlg == false)
 		{
 			if (p >= 1.0f)
@@ -71,8 +97,13 @@ void KdMovableObject::Update()
 				if (wp >= 1.0f)
 				{	
 					m_waitduration = 0.0f;
-					endFlg = true;
 					m_wayNum += 1;
+
+					if (m_wayNum >= m_wayPoints.size()-1)
+					{
+						endFlg = true;
+					}
+
 				}
 				else
 				{
@@ -95,7 +126,12 @@ void KdMovableObject::Update()
 					m_duration = 0.0f;
 					m_waitduration = 0.0f;
 					m_wayNum -= 1;
-					endFlg = false;
+
+					if (m_wayNum <= 1)
+					{
+						endFlg = false;
+					}
+					
 				}
 				else
 				{
@@ -110,10 +146,10 @@ void KdMovableObject::Update()
 		}
 	}
 
-	if (m_duration > 1.0f)
-	{
-		m_duration = 1.0f;
-	}
+	//if (m_duration > 1.0f)
+	//{
+	//	m_duration = 1.0f;
+	//}
 
 	// Transformの取得
 	auto tT = moveObj->GetTransform();
@@ -178,7 +214,9 @@ void KdMovableObject::Editor_ImGui()
 
 	ImGui::DragFloat(u8"片道必要時間", &m_oneMoveTime, 0.01f);
 	ImGui::DragFloat(u8"待ち時間", &m_waitTime, 0.01f);
-	ImGui::Checkbox(u8"往復するか", &m_roundTrip);
+	if(ImGui::Checkbox(u8"往復するか", &m_roundTrip)){
+		Set();
+	}
 }
 
 void KdMovableObject::Serialize(nlohmann::json& outJson) const
@@ -205,6 +243,8 @@ void KdMovableObject::Set()
 {
 	// 各項目クリア
 	m_duration = 0.0f;
+	m_waitduration = 0.0f;
+	m_wayNum = 1;
 	m_moveObject.reset();
 	m_start.reset();
 	m_end.reset();

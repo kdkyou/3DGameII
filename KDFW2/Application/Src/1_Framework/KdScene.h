@@ -74,6 +74,10 @@ public:
 		m_collectedObjects.clear();
 	}
 
+	// GameObject‚ÌŽæ“¾ŠÖŒW
+	// Guid‚©‚çGameObject‚ð’T‚·
+	std::shared_ptr<KdGameObject> FindObjectWithGuid(const std::string& guidStr);
+
 	//===============================
 	// 
 	// Serialize / Deserialize

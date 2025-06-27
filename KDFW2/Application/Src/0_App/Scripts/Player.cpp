@@ -3,6 +3,7 @@
 #include"Collision.h"
 
 #include"../../1_Framework/Component/KdMoveRecorder.h"
+#include"Editor/KdEditorData.h"
 
 //フレームワークにコンポーネントであることを登録
 SetClassAssembly(Player, "Component");
@@ -148,6 +149,9 @@ void Player::Update()
 	m_ridingObject = m_spCollision->GetTargetb();
 	if (m_ridingObject != nullptr)
 	{
+		// ログ出力
+		KdEditorData::GetInstance().m_logWindow.AddLog(u8"%sの上に乗っている",m_ridingObject->GetName().c_str());
+
 		auto moveRec = m_ridingObject->GetComponent<KdMoveRecorder>();
 
 		if (moveRec != nullptr)
@@ -158,6 +162,12 @@ void Player::Update()
 				GetGameObject()->GetTransform()->GetWorldMatrix() * diff
 			);
 		}
+	}
+	else
+	{
+		KdEditorData::GetInstance().m_logWindow.AddLog(u8"何にも乗っていない");
+
+
 	}
 
 }

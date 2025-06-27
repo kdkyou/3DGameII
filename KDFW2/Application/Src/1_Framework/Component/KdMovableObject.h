@@ -46,6 +46,6 @@ private:
 	//Œ»İ‚ÌŒo‰ßŠÔ
 	float m_duration = 0.0f;
 	float m_waitduration = 0.0f;
-	int   m_wayNum = 0;
+	int   m_wayNum = 1;
 
 };

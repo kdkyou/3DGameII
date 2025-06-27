@@ -209,6 +209,31 @@ void KdScreenData::Rendering(const std::vector<KdGameObject*>& gameObjects, cons
 		}
 	}
 
+	// UI描画
+	auto& sm = KdShaderManager::GetInstance();
+	// 現在の画面の大きさ
+	UINT num = 1;
+	D3D11_VIEWPORT vp = {};
+	D3D.GetDevContext()->RSGetViewports(&num,&vp);
+
+	// Copied--------------->
+	// カメラは単位行列にする
+	sm.m_cbPerCamera->EditCB().mV = KdMatrix::Identity;
+
+	// 射影変換行列はピクセル→射影空間へ変換する行列
+	auto mStoP = KdMatrix::CreateOrthographic(vp.Width, vp.Height, 0, 1);
+	sm.m_cbPerCamera->EditCB().mP = mStoP;
+
+	// 行列の更新
+	sm.m_cbPerCamera->WriteWorkData();
+	// <---------------Copied
+
+	// 描画関数の呼び出し
+	for (auto&& comp : m_drawList)
+	{
+		comp->Draw(true, KdShader::PassTags::Sprite);
+	}
+
 
 	//+++++++++++++++++++++++++++
 	// 

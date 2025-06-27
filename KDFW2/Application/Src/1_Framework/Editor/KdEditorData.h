@@ -28,6 +28,9 @@ public:
 	// ログウィンドウ
 	ImGuiLogWindow			m_logWindow;
 
+	// 文字列の一時保存用
+	std::string Clipboard = "";
+
 	// ファイルを開くダイアログボックスを表示
 	// ・filepath		… 選択されたファイルパスが入る
 	// ・title			… ウィンドウのタイトル文字

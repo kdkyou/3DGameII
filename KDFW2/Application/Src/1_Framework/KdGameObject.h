@@ -14,6 +14,7 @@ public:
 
 	KdGameObject() {}
 
+	
 	// 名前設定
 	void SetName(const std::string& name) { m_name = name; }
 	// 名前取得
@@ -30,6 +31,10 @@ public:
 
 	// Transform取得
 	std::shared_ptr<KdTransformComponent> GetTransform() const { return std::static_pointer_cast<KdTransformComponent>(m_components[0]); }
+
+	// Guidの取得
+	const std::string& GetGuid()const { return m_guid.ToString(); }
+
 
 	// 自分や自分の子たち対象に、有効なGameObjectをgameObjectListへ登録する
 	void Collect(std::vector<KdGameObject*>& gameObjectList);

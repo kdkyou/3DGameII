@@ -103,7 +103,7 @@ void Collision::Update()
 
 					if (ray.isGravity)
 					{
-						bool hit = KdRayToMesh(vStartPos, ray.direction, ray.correction.y + fallDist, *node.Mesh, oppMat, hitResult);
+						bool hit = KdRayToMesh(vStartPos, ray.direction, ray.correction.y + fallDist+0.01f, *node.Mesh, oppMat, hitResult);
 
 						//
 						if (hit)
