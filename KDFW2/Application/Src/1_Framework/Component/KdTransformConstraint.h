@@ -12,6 +12,7 @@ public:
 	// ’Ç]•û–@
 	enum Type
 	{
+		None,		// ‰½‚à‚È‚µ
 		Totally,	// Š®‘S’Ç](ö‹Æ)
 		Position,	// ˆÊ’u‚Ì‚İ’Ç]
 		Rotation,  // ‰ñ“]‚Ì‚İ’Ç]

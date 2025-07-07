@@ -44,7 +44,7 @@ void RecFindObjectWithGuid(
 {
 
 	// 自分自身が対象か
-	if (parent->GetGuid() == guid) { 
+	if (parent->GetKdGuid().ToString() == guid) {
 		out = parent;
 	}
 	// 子どもたちを検索
@@ -280,7 +280,7 @@ void KdScene::Editor_ImGui()
 
 								//展開先は新しいGameObject
 								auto newObj = std::make_shared<KdGameObject>();
-								newObj->Deserialize(serial);
+								newObj->Deserialize(serial,true);
 
 								//選択(右クリック)されたオブジェクトを親にする
 								newObj->SetParent(gameObj, false);
@@ -305,7 +305,7 @@ void KdScene::Editor_ImGui()
 						// GameObject作成
 						auto newObj = std::make_shared<KdGameObject>();
 						// JSONデータから設定(デシリアライズ)
-						newObj->Deserialize(serial);
+						newObj->Deserialize(serial,true);
 						// 追加
 						newObj->SetParent(gameObj->GetParent(), false);
 

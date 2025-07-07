@@ -33,8 +33,8 @@ public:
 	std::shared_ptr<KdTransformComponent> GetTransform() const { return std::static_pointer_cast<KdTransformComponent>(m_components[0]); }
 
 	// Guidの取得
-	const std::string& GetGuid()const { return m_guid.ToString(); }
-
+	const std::string& GetGuid()const  { return m_guid.ToString(); }
+	const KdGuid& GetKdGuid()const { return m_guid; }
 
 	// 自分や自分の子たち対象に、有効なGameObjectをgameObjectListへ登録する
 	void Collect(std::vector<KdGameObject*>& gameObjectList);
@@ -171,7 +171,10 @@ public:
 	// 
 	//===============================
 	// JSONデータから、クラスの内容を設定
-	void Deserialize(const nlohmann::json& jsonObj);
+	//											 Guidを新規に振り直すか
+	void Deserialize(const nlohmann::json& jsonObj,bool isNewGuid = false);
+
+
 	// このクラスの内容をJSONデータ化する
 	void Serialize(nlohmann::json& outJson) const;
 

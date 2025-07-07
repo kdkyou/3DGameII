@@ -227,6 +227,7 @@
     <ClInclude Include="Src\2_CoreSystem\Math\KdMath.h" />
     <ClInclude Include="Src\2_CoreSystem\nlohmann\json.hpp" />
     <ClInclude Include="Src\2_CoreSystem\nlohmann\KdJsonUtility.h" />
+    <ClInclude Include="Src\2_CoreSystem\ResourceManager\KdAssetManager.h" />
     <ClInclude Include="Src\2_CoreSystem\ResourceManager\KdResourceManager.h" />
     <ClInclude Include="Src\2_CoreSystem\Utilities\KdGuid.h" />
     <ClInclude Include="Src\2_CoreSystem\Utilities\strconv.h" />
@@ -295,7 +296,9 @@
     <ClCompile Include="Src\2_CoreSystem\Math\KdCollision.cpp" />
     <ClCompile Include="Src\2_CoreSystem\Math\KdEase.cpp" />
     <ClCompile Include="Src\2_CoreSystem\Math\KdMath.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\ResourceManager\KdAssetManager.cpp" />
     <ClCompile Include="Src\2_CoreSystem\ResourceManager\KdResourceManager.cpp" />
+    <ClCompile Include="Src\2_CoreSystem\Utilities\KdGuid.cpp" />
     <ClCompile Include="Src\Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

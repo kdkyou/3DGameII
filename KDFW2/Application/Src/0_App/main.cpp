@@ -71,6 +71,10 @@ bool Application::Initialize()
 		return false;
 	}
 
+	// AssetManagerの準備
+	KdAssetManager::GetInstance().Initialize();
+
+
 	// シェーダーマネージャ初期化
 	KdShaderManager::GetInstance().Init();
 

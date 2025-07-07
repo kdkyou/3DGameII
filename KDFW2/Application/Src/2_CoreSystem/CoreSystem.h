@@ -36,8 +36,11 @@ using Microsoft::WRL::ComPtr;
 // Graphics 
 #include "Graphics/KdGraphics.h"
 
-
+// AssetÅEResourceä«óù
 #include "ResourceManager/KdResourceManager.h"
+#include "ResourceManager/KdAssetManager.h"
+
+
 
 /*
 //====================================================

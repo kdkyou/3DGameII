@@ -295,6 +295,9 @@
     <ClInclude Include="Src\1_Framework\Component\KdTransformConstraint.h">
       <Filter>1_Framework\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Src\2_CoreSystem\ResourceManager\KdAssetManager.h">
+      <Filter>2_CoreSystem\ResourceManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp">
@@ -493,6 +496,12 @@
     </ClCompile>
     <ClCompile Include="Src\1_Framework\Component\KdTransformConstraint.cpp">
       <Filter>1_Framework\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Utilities\KdGuid.cpp">
+      <Filter>2_CoreSystem\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\ResourceManager\KdAssetManager.cpp">
+      <Filter>2_CoreSystem\ResourceManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

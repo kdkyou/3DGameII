@@ -108,11 +108,17 @@ void KdGameObject::SetParent(const std::shared_ptr<KdGameObject>& newParent, boo
 	}
 }
 
-void KdGameObject::Deserialize(const nlohmann::json& jsonObj)
+void KdGameObject::Deserialize(const nlohmann::json& jsonObj, bool isNewGuid)
 {
+	// 保存したGuidを復元
 	std::string strGuid;
 	KdJsonUtility::GetValue(jsonObj, "Guid", &strGuid);
 	m_guid.FromString(strGuid);
+
+	if (isNewGuid == true)
+	{
+		m_guid.NewGuid();	// 新たに振られたことを覚える
+	}
 
 	KdJsonUtility::GetValue(jsonObj, "Enable", &m_enable);
 	KdJsonUtility::GetValue(jsonObj, "Name", &m_name);
@@ -144,7 +150,7 @@ void KdGameObject::Deserialize(const nlohmann::json& jsonObj)
 	{
 		// 新規GameObjectを作成し、デシリアライズ
 		std::shared_ptr<KdGameObject> newObj = std::make_shared<KdGameObject>();
-		newObj->Deserialize(childJson);
+		newObj->Deserialize(childJson, isNewGuid);
 
 		// 子リストへ追加
 		m_children.push_back(newObj);
@@ -215,8 +221,8 @@ void KdGameObject::Editor_ImGui()
 	//-------------------------------
 	// 全コンポーネント
 	//-------------------------------
-	for(size_t iComp = 0;iComp < m_components.size(); iComp++)
-//	for (auto& it = m_components.begin(); it != m_components.end(); )
+	for (size_t iComp = 0; iComp < m_components.size(); iComp++)
+		//	for (auto& it = m_components.begin(); it != m_components.end(); )
 	{
 		auto& comp = m_components[iComp];
 
@@ -288,7 +294,7 @@ void KdGameObject::Editor_ImGui()
 
 		ImGui::PopID();
 
-//		if (it == m_components.end())break;
-//		++it;
+		//		if (it == m_components.end())break;
+		//		++it;
 	}
 }
