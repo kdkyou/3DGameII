@@ -1,0 +1,1 @@
+{"Children":[],"Components":[{"ClassName":"KdTransformComponent","Enable":true,"Position":[0.0,0.0,0.0],"Rotation":[0.0,0.0,0.0,1.0],"Scale":[1.0,1.0,1.0]},{"ClassName":"KdImage","Enable":true,"Height":512,"Pos":[0.0,0.0],"Width":512,"useGuid":"1a8dcf95-922c-4b3c-a327-e437550583b1"}],"Enable":true,"Guid":"c03f222d-1049-4615-a904-d14b8453a5a2","Name":"New GameObject","Tag":""}

@@ -371,14 +371,21 @@ void KdEditorData::UpdateImGui()
 			if (ImGui::BeginMenu(u8"ファイル操作"))
 			{
 				// メニュー項目(縦)
-				if (ImGui::MenuItem(u8"Metaファイルを作成"))
+				if (ImGui::MenuItem(u8"Metaファイル作成"))
 				{
 					KdAssetManager::GetInstance().CreateMetaFileForAllAssets();
 				}
 
+				// メニュー項目(縦)
+				if (ImGui::MenuItem(u8"実行時データ更新"))
+				{
+					KdAssetManager::GetInstance().CreateRuntimeData();
+				}
+
+
 				ImGui::Separator();
 				// メニュー項目
-				if (ImGui::MenuItem(u8"Metaファイルを削除"))
+				if (ImGui::MenuItem(u8"Metaファイル削除"))
 				{
 					KdAssetManager::GetInstance().DeleteAllMetaFiles();
 				}
@@ -389,6 +396,11 @@ void KdEditorData::UpdateImGui()
 			
 			ImGui::EndMenuBar();
 		}
+
+
+		// 画面本体
+		KdAssetManager::GetInstance().Editor_ImGui();
+
 	}
 	ImGui::End();
 

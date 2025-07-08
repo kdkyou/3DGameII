@@ -10,7 +10,18 @@ void KdImage::Start()
 {
 	m_polygon = std::make_shared<KdPolygon>();
 	m_polygon->Initialize();
+	
+	//Guidが設定されていたら(読み込んでいたら)テクスチャを読み込む
+	if (m_imageGuid != "" && m_texture == nullptr)
+	{
+		// Guidからファイルパスの取得
+		auto path = KdAssetManager::GetInstance().GetFilePathWithGuid(m_imageGuid);
+		m_texture = KdResourceManager::GetInstance().LoadAsset<KdTexture>(path);
+
+	}
 	CreateVertex();	// デフォルトの表示用頂点を作る
+
+
 
 }
 
@@ -61,7 +72,7 @@ void KdImage::Editor_ImGui()
 {
 	KdComponent::Editor_ImGui();
 
-	// テクスチャの読み込み
+	// テクスチャの読み込み →将来的に廃止
 	if (ImGui::Button(u8"画像の読み込み"))
 	{
 		std::string filePath = "";
@@ -82,11 +93,58 @@ void KdImage::Editor_ImGui()
 			}
 
 			m_texture = tex;
-			m_imagePath = filePath;
 			
 			CreateVertex();
 		}
 	}
+
+	// Guidを指定してテクスチャを選択
+	auto selAsset = KdAssetManager::GetInstance().GetSelectedAsset();
+
+	if (selAsset != nullptr)
+	{
+		// データタイプの検査(テクスチャかどうか)
+
+		// 選択中のAssetをImageとして使う
+		std::string bStr = selAsset->FileName + u8"を設定";
+		if (ImGui::Button(bStr.c_str()))
+		{
+			
+
+			//画像データとして読み込めるかどうか
+			auto tex = KdResourceManager::GetInstance().LoadAsset<KdTexture>(selAsset->FilePath);
+
+			if (tex == nullptr) { return; }
+
+			// AssetのGuidを覚えておく
+			m_imageGuid = selAsset->guid;
+
+			// 初めてテクスチャを設定したのであれば
+			// 画像の幅高さにサイズを合わせる
+			if (m_texture == nullptr)
+			{
+				m_width = tex->GetWidth();
+				m_height = tex->GetHeight();
+			}
+
+			m_texture = tex;
+
+			CreateVertex();
+
+		}
+	}
+
+	// 使用中の画像名
+	std::string imageName = "default";
+	auto asset = KdAssetManager::GetInstance().GetAssetPropertyWithGuid(m_imageGuid);
+	// Guidからファイル情報が取れた
+	if (asset != nullptr) { imageName = asset->FileName; }
+	// Guidが設定されているのに、ファイル情報が見つからなかった
+	else if (m_imageGuid != "") { imageName = "missing"; }
+	// 表示
+	ImGui::LabelText(u8"使用画像", imageName.c_str());
+
+
 
 	// ピクセル座標の調整
 	bool ch = false;
@@ -113,17 +171,12 @@ void KdImage::Deserialize(const nlohmann::json& jsonObj)
 {
 	KdComponent::Deserialize(jsonObj);
 
-	KdJsonUtility::GetValue(jsonObj, "ImagePath", &m_imagePath);
+	KdJsonUtility::GetValue(jsonObj, "useGuid", &m_imageGuid);
 	auto pos = GetGameObject()->GetTransform()->GetLocalPosition();
 	KdJsonUtility::GetArray(jsonObj, "Pos", &pos.x, 2);
 	KdJsonUtility::GetValue(jsonObj, "Width", &m_width);
 	KdJsonUtility::GetValue(jsonObj, "Height", &m_height);
 
-	auto tex = KdResourceManager::GetInstance().LoadAsset<KdTexture>(m_imagePath);
-	if (tex != nullptr)
-	{
-		m_texture = tex;
-	}
 	GetGameObject()->GetTransform()->SetLocalPosition(pos);
 
 }
@@ -132,7 +185,7 @@ void KdImage::Serialize(nlohmann::json& outJson) const
 {
 	KdComponent::Serialize(outJson);
 
-	outJson["ImagePath"] = m_imagePath;
+	outJson["useGuid"] = m_imageGuid;
 	auto pos = GetGameObject()->GetTransform()->GetLocalPosition();
 	outJson["Pos"] =KdJsonUtility::CreateArray(&pos.x,2);
 	outJson["Width"] = m_width;

@@ -14,8 +14,11 @@ std::shared_ptr<KdObject> KdResourceManager::LoadAsset(const std::string& assetP
 	// メタファイルがある場合は、情報取得
 	nlohmann::json metaData;
 	std::ifstream ifs(assetPath + ".kdfwmeta");
-	if (ifs)
+	// if (ifs)
+	if(false)	// まだデータタイプを覚えてないので一旦なし
 	{
+
+
 		// メタファイル読み込み
 		ifs >> metaData;
 

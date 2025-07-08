@@ -28,8 +28,10 @@ private:
 	int m_height = 100;
 
 	// 読み込んだテクスチャ
-	std::string m_imagePath = "";
+	/*std::string m_imagePath = "";*/
 	std::shared_ptr<KdTexture> m_texture = nullptr;
 
+	// 紐づけている画像のGuid
+	std::string m_imageGuid = "";
 
 };

@@ -6,6 +6,33 @@
 class KdAssetManager 
 {
 public :
+	// ゲーム実行中に称するAssetの情報
+	struct AssetPropety {
+		std::string guid = "";
+		std::string FilePath = ""; // 実行直後に調べる
+		std::string FileName = ""; // ファイル名のみ
+	};
+
+	// 実行時に必要なデータを作成する
+	void CreateRuntimeData();
+
+	// 現在選択中のAsset
+	const AssetPropety* GetSelectedAsset() const { return m_selAsset; }
+	// GuidからAssetのファイルパスを送る関数
+	const std::string& GetFilePathWithGuid(const std::string guid) const;
+	// GuidからAssetPropertyの取得
+	const AssetPropety* GetAssetPropertyWithGuid(const std::string& guid)const;
+
+private:
+
+	// 実行時に必要なデータリスト
+	// キー(std::string)：ファイルのGuid
+	std::map<std::string, AssetPropety> m_assets;
+
+	//エディター操作
+	AssetPropety* m_selAsset = nullptr;
+
+public :
 
 	void Initialize();
 	void Editor_ImGui();
@@ -16,7 +43,11 @@ public :
 	void DeleteAllMetaFiles();
 
 
+
 private:
+
+	// Metaファイルの内容を作成する
+	nlohmann::json CreateMetaData(const std::filesystem::path& srcFile);
 
 	// 対応しているアセットの拡張子
 	std::vector<std::string> m_supportedExtentions;
@@ -26,7 +57,7 @@ private:
 	// アセットが入っているフォルダ
 	std::string m_assetsFilePath = "./Assets/";
 	// 作成するメタファイルの拡張子
-	std::string m_metaFileExtention = ".astsmeta";
+	std::string m_metaFileExtention = ".kdfwmeta";
 
 
  // シングルトン

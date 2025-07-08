@@ -1,0 +1,6 @@
+{
+  "hlsl.additionalIncludeDirectories": [
+    ".",
+    "Src\\2_CoreSystem\\Graphics\\Shader"
+  ]
+}
