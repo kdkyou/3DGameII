@@ -166,6 +166,7 @@
     <ClInclude Include="Src\0_App\Scripts\Player.h" />
     <ClInclude Include="Src\0_App\Shader\Polygon\KdPolygon.h" />
     <ClInclude Include="Src\0_App\Shader\PP_Bloom\PP_Bloom.h" />
+    <ClInclude Include="Src\0_App\Shader\PP_ColorCollection\PP_ColocCollection.h" />
     <ClInclude Include="Src\0_App\Shader\PP_SSAO\PP_SSAO.h" />
     <ClInclude Include="Src\0_App\Shader\PP_ToneMapping\PP_ToneMapping.h" />
     <ClInclude Include="Src\0_App\Windows\Resource.h" />
@@ -243,6 +244,7 @@
     <ClCompile Include="Src\0_App\Scripts\Player.cpp" />
     <ClCompile Include="Src\0_App\Shader\Polygon\KdPolygon.cpp" />
     <ClCompile Include="Src\0_App\Shader\PP_Bloom\PP_Bloom.cpp" />
+    <ClCompile Include="Src\0_App\Shader\PP_ColorCollection\PP_ColocCollection.cpp" />
     <ClCompile Include="Src\0_App\Shader\PP_SSAO\PP_SSAO.cpp" />
     <ClCompile Include="Src\0_App\Shader\PP_ToneMapping\PP_ToneMapping.cpp" />
     <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp" />

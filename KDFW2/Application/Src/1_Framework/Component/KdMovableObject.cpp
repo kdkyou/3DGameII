@@ -17,14 +17,7 @@ void KdMovableObject::Update()
 
 	if (m_wayPoints.size() < 2) { return;}
 
-	if (m_wayNum > m_wayPoints.size() - 2)
-	{
-		//
-		m_wayNum = m_wayPoints.size() - 2;
-	}
-	else if (m_wayNum < 1) {
-		m_wayNum = 1;
-	}
+	
 
 	static bool endFlg = false;
 	
@@ -32,7 +25,7 @@ void KdMovableObject::Update()
 	{
 		if (m_wayNum > m_wayPoints.size() - 2)
 		{
-			m_wayNum = 0;
+			m_wayNum = 1;
 		}
 
 		m_start = m_wayPoints[m_wayNum];
@@ -40,6 +33,16 @@ void KdMovableObject::Update()
 	}
 	else
 	{
+
+		if (m_wayNum > m_wayPoints.size() - 2)
+		{
+			//
+			m_wayNum = m_wayPoints.size() - 2;
+		}
+		else if (m_wayNum < 1) {
+			m_wayNum = 1;
+		}
+
 		if (endFlg == false)
 		{
 			m_start = m_wayPoints[m_wayNum];
@@ -47,7 +50,7 @@ void KdMovableObject::Update()
 		}
 		else
 		{
-			m_start = m_wayPoints[m_wayNum+1];
+			m_start = m_wayPoints[m_wayNum + 1];
 			m_end = m_wayPoints[m_wayNum];
 		}
 	}
@@ -96,6 +99,7 @@ void KdMovableObject::Update()
 			{
 				if (wp >= 1.0f)
 				{	
+					m_duration = 0.0f;
 					m_waitduration = 0.0f;
 					m_wayNum += 1;
 
@@ -118,7 +122,7 @@ void KdMovableObject::Update()
 		}
 		else
 		{
-			if (p <= 0.0f)
+			if (p >= 1.0f)
 			{
 				if (wp >= 1.0f)
 				{
@@ -127,7 +131,7 @@ void KdMovableObject::Update()
 					m_waitduration = 0.0f;
 					m_wayNum -= 1;
 
-					if (m_wayNum <= 1)
+					if (m_wayNum < 1)
 					{
 						endFlg = false;
 					}
@@ -141,7 +145,7 @@ void KdMovableObject::Update()
 			else
 			{
 				//Œo‰ßŽžŠÔXV
-				m_duration -= KdTime::GetInstance().GetDeltaTime();
+				m_duration += KdTime::GetInstance().GetDeltaTime();
 			}
 		}
 	}

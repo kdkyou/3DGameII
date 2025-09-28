@@ -24,7 +24,7 @@ public:
 	{
 	public:
 		// 形状名の取得 (変数にする場合)
-		virtual std::string GetName() { return "None"; }
+		virtual const std::string GetName()const { return "None"; }
 
 		// エディタ画面
 		virtual void Editor_ImGui() {}
@@ -45,6 +45,16 @@ public:
 
 		bool IsCreated() { return m_isCreated; }
 
+		// JSONデータから、クラスの内容を設定
+		virtual void Deserialize(const nlohmann::json& jsonObj){
+			KdJsonUtility::GetValue(jsonObj, "Color", &m_color);
+		}
+		// このクラスの内容をJSONデータ化する
+		virtual void Serialize(nlohmann::json& outJson) const {
+			outJson["Color"] = m_color;
+			outJson["ShapeName"] = GetName();
+		}
+
 	protected:
 		// 全ての形状で使用するデータ
 		UINT m_color = 0xFFFFFFFF;
@@ -58,7 +68,7 @@ public:
 	class LineShape :public ShapeBase
 	{
 	public:
-		std::string GetName() override { return "Line"; }
+		const std::string GetName() const override { return "Line"; }
 
 		bool CreateVertex(std::shared_ptr<KdPolygon> poly)override;
 
@@ -71,7 +81,10 @@ public:
 		UINT AddPoint(const KdVector3& dir, float length);
 		UINT AddPoint(const KdVector3& dir, const KdVector3 offset, float length) {}
 
-
+		// JSONデータから、クラスの内容を設定
+		virtual void Deserialize(const nlohmann::json& jsonObj)override;
+		// このクラスの内容をJSONデータ化する
+		virtual void Serialize(nlohmann::json& outJson) const override;
 	private:
 
 		//登録されたポイント一覧
@@ -82,7 +95,7 @@ public:
 	class SphereShape :public ShapeBase
 	{
 	public:
-		std::string GetName() override { return "Sphere"; }
+		const std::string GetName()const override { return "Sphere"; }
 
 		bool CreateVertex(std::shared_ptr<KdPolygon> poly)override;
 
@@ -93,6 +106,11 @@ public:
 		//最後の地点から指定方向に次のポイントを作る
 		//最初の場合はGameOBjectの場所
 		UINT AddSphere(const KdVector3& center, float radius);
+
+		// JSONデータから、クラスの内容を設定
+		virtual void Deserialize(const nlohmann::json& jsonObj)override;
+		// このクラスの内容をJSONデータ化する
+		virtual void Serialize(nlohmann::json& outJson) const override;
 
 	private:
 
@@ -125,6 +143,10 @@ public:
 	//形状詳細を決めて渡してもらう
 	void SetShape(std::shared_ptr<ShapeBase> shape);
 
+	// JSONデータから、クラスの内容を設定
+	virtual void Deserialize(const nlohmann::json& jsonObj) override;
+	// このクラスの内容をJSONデータ化する
+	virtual void Serialize(nlohmann::json& outJson) const override;
 
 private:
 	// 現在表示している形状ID

@@ -2,6 +2,61 @@
 
 #include"Editor/KdEditorData.h"
 
+void KdAssetManager::CopyAssetsKeepFolders(const std::string& outPath) const
+{
+	// コピー元とコピー先が同じ
+	if (outPath == m_assetsFilePath) { return; }
+
+	// 吐き出し先のフォルダパスを作成
+	std::filesystem::path outDir(outPath);
+	// 既に出力先があるかどうか
+	if (std::filesystem::exists(outPath)  == true)
+	{
+		// 一旦すべて削除
+		std::filesystem::remove_all(outPath);
+	}
+
+	// 出力先を作成
+	std::filesystem::create_directories(outDir);
+
+	// コピー元のディレクトリをクロール
+	for (auto& entry : std::filesystem::recursive_directory_iterator(m_assetsFilePath))
+	{
+		// メタファイルかどうか
+		if(entry.path().extension().string() != m_metaFileExtention){continue;}
+
+		// メタファイルのパス作成
+		auto metaFilePath = entry.path();
+		// メタファイルのパスからAssetのパスを作成
+		auto assetFilePath = entry.path();
+		assetFilePath.replace_extension("");
+
+		// アセットデータが存在しない
+		if (std::filesystem::exists(assetFilePath) == false) { continue; }
+
+		// 出力先のパスを作成
+		auto outDir = outPath / metaFilePath;
+		outDir.remove_filename();	// ディレクトリ情報だけにする
+		// 出力先のディレクトリの作成
+		std::filesystem::create_directories(outDir);
+
+		// メタファイルのコピー
+		std::filesystem::copy_file(metaFilePath,outPath/metaFilePath);
+		// Assetファイルのコピー
+		std::filesystem::copy_file(assetFilePath, outPath / assetFilePath);
+
+
+		// Log出力
+		KdEditorData::GetInstance().m_logWindow.AddLog(u8"Assetファイルとメタファイルのコピー：%s", assetFilePath.filename().string().c_str());
+	}
+
+	//ログ出力
+	KdEditorData::GetInstance().m_logWindow.AddLog(u8"Assetファイルコピー");
+
+
+
+}
+
 void KdAssetManager::CreateRuntimeData()
 {
 	m_assets.clear();
@@ -73,9 +128,8 @@ void KdAssetManager::Initialize()
 	// 対応する拡張子の登録=>最終的には外部ファイル
 	m_supportedExtentions.clear();
 	m_supportedExtentions.push_back(".png");
-	// 追加
+	m_supportedExtentions.push_back(".cso");
 	//m_supportedExtentions.push_back(".gltf");
-	//m_supportedExtentions.push_back(".cso");
 	//m_supportedExtentions.push_back(".kdanim");
 	//m_supportedExtentions.push_back(".kdprefab");
 	//m_supportedExtentions.push_back(".scene");

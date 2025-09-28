@@ -100,6 +100,14 @@ UINT KdPrimitiveRenderer::LineShape::AddPoint(const KdVector3& dir, float length
 	return (UINT)m_points.size();
 }
 
+void KdPrimitiveRenderer::LineShape::Deserialize(const nlohmann::json& jsonObj)
+{
+}
+
+void KdPrimitiveRenderer::LineShape::Serialize(nlohmann::json& outJson) const
+{
+}
+
 
 // ‹…‘Ì•`‰æ
 bool KdPrimitiveRenderer::SphereShape::CreateVertex(std::shared_ptr<KdPolygon> poly)
@@ -262,6 +270,23 @@ UINT KdPrimitiveRenderer::SphereShape::AddSphere(const KdVector3& center, float 
 	return (UINT)m_spheres.size();
 }
 
+void KdPrimitiveRenderer::SphereShape::Deserialize(const nlohmann::json& jsonObj)
+{
+	//ShapeBase::Deserialize(jsonObj);
+
+
+}
+
+void KdPrimitiveRenderer::SphereShape::Serialize(nlohmann::json& outJson) const
+{
+	for (auto& shape : m_spheres) {
+		ShapeBase::Serialize(outJson);
+		outJson["Sphere"]["Center"] = KdJsonUtility::CreateArray(&shape.center.x, 3);
+		outJson["Sphere"]["Radius"] = shape.radius;
+		outJson["Sphere"]["Detail"] = m_detail;
+	}
+}
+
 
 
 // 6/2’Ç‰Á
@@ -395,5 +420,28 @@ void KdPrimitiveRenderer::SetShape(std::shared_ptr<ShapeBase> shape)
 	// “n‚³‚ê‚½Œ`ó‚ð“o˜^
 	m_shape = shape;
 	m_shape->ReCreate();
+
+}
+
+void KdPrimitiveRenderer::Deserialize(const nlohmann::json& jsonObj)
+{
+	KdComponent::Deserialize(jsonObj);
+
+	std::string str;
+	KdJsonUtility::GetValue(jsonObj, "ShapeName", &str);
+	
+	if (str == "Sphere") {
+		auto shape = std::make_shared<SphereShape>();
+		shape->Deserialize(jsonObj);
+		m_shape = shape;
+	}
+
+}
+
+void KdPrimitiveRenderer::Serialize(nlohmann::json& outJson) const
+{
+	KdComponent::Serialize(outJson);
+
+	m_shape->Serialize(outJson);
 
 }

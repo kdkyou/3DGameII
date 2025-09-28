@@ -52,7 +52,19 @@ void KdTransformConstraint::Update()
 		// 自身のLocal座標とtargetのworld座標,
 		// しかし、そのまま計算をするとどっか行く
 		// ワールド行列にターゲットの行列を取得
-		trans->SetWorldMatrix((trans->GetWorldMatrix()*targetTrans->GetWorldMatrix()));
+		{
+
+		auto mP = targetTrans->GetWorldMatrix();
+		auto mC = trans->GetWorldMatrix();
+
+		// 初回
+		if (m_offset == nullptr) {
+			m_offset =std::make_shared<KdMatrix>();
+			*m_offset = mC * mP.Invert();
+		}
+
+		trans->SetWorldMatrix(*m_offset * mP);
+		}
 
 		break;
 	case LookAt:
@@ -103,23 +115,22 @@ void KdTransformConstraint::Editor_ImGui()
 	}
 	ImGui::LabelText(u8"ターゲット名", targetName.c_str());
 
-	static Type sel = None;
-	if (m_target.expired() != true)
+	// 追尾方法を選択
+	bool selItem[Type::Num] = {};
+	selItem[m_chaseType]= true;
+	if (ImGui::BeginListBox(u8"追従方法"))
 	{
-		if (ImGui::BeginListBox(u8"追跡方法"))
-		{
-			if (ImGui::Selectable("Totally")) { sel = Totally; }
-			if (ImGui::Selectable("Position")) { sel = Position; }
-			if (ImGui::Selectable("Rotation")) { sel = Rotation; }
-			if (ImGui::Selectable("Parent")) { sel = Parent; }
-			if (ImGui::Selectable("LookAt")) { sel = LookAt; }
+		if(ImGui::Selectable(u8"完全追従", selItem[Totally])) { m_chaseType = Totally; }
+		if(ImGui::Selectable(u8"位置だけ", selItem[Position])) { m_chaseType = Position; }
+		if(ImGui::Selectable(u8"回転だけ", selItem[Rotation])) { m_chaseType = Rotation; }
+		if(ImGui::Selectable(u8"親子構造", selItem[Parent])) { m_chaseType = Parent; }
+		if(ImGui::Selectable(u8"向くだけ", selItem[LookAt])) { m_chaseType = LookAt; }
+		ImGui::EndListBox();
+	}
 
-			ImGui::EndListBox();
-		}
-		if (sel != None && ImGui::Button(u8"決定"))
-		{
-			m_chaseType = sel;
-		}
+	if (m_chaseType != Parent && m_offset != nullptr) 
+	{
+		m_offset = nullptr;
 	}
 
 }

@@ -3,6 +3,7 @@
 #include "Shader/PP_ToneMapping/PP_ToneMapping.h"
 #include "Shader/PP_SSAO/PP_SSAO.h"
 #include "Shader/PP_Bloom/PP_Bloom.h"
+#include "Shader/PP_ColorCollection/PP_ColocCollection.h"
 
 #include "ClassAssembly/KdClassAssembly.h"
 
@@ -134,6 +135,12 @@ bool Application::Initialize()
 
 	{
 		auto pp = std::make_shared<PP_ToneMapping>();
+		pp->Initialize();
+		KdRenderSettings::GetInstance().m_postProcesses.push_back(pp);
+	}
+
+	{
+		auto pp = std::make_shared<PP_ColorCollection>();
 		pp->Initialize();
 		KdRenderSettings::GetInstance().m_postProcesses.push_back(pp);
 	}

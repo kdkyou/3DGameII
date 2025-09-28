@@ -73,6 +73,9 @@
     <Filter Include="0_App\Shader\Polygon">
       <UniqueIdentifier>{697f57ff-4a5c-47a4-8059-4eb5e0c8399a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="0_App\Shader\PP_ColorCollection">
+      <UniqueIdentifier>{20c3e5b5-b948-4ead-8341-2f89acc04869}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\0_App\Windows\WindowsWindow.h">
@@ -298,6 +301,9 @@
     <ClInclude Include="Src\2_CoreSystem\ResourceManager\KdAssetManager.h">
       <Filter>2_CoreSystem\ResourceManager</Filter>
     </ClInclude>
+    <ClInclude Include="Src\0_App\Shader\PP_ColorCollection\PP_ColocCollection.h">
+      <Filter>0_App\Shader\PP_ColorCollection</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp">
@@ -388,7 +394,6 @@
     <ClCompile Include="Src\1_Framework\Editor\KdEditorData.cpp">
       <Filter>1_Framework\Editor</Filter>
     </ClCompile>
-    <ClCompile Include="Src\2_CoreSystem\Graphics\KdGraphicsStates.cpp" />
     <ClCompile Include="Src\1_Framework\KdScreenData.cpp">
       <Filter>1_Framework</Filter>
     </ClCompile>
@@ -502,6 +507,12 @@
     </ClCompile>
     <ClCompile Include="Src\2_CoreSystem\ResourceManager\KdAssetManager.cpp">
       <Filter>2_CoreSystem\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\2_CoreSystem\Graphics\KdGraphicsStates.cpp">
+      <Filter>2_CoreSystem\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\0_App\Shader\PP_ColorCollection\PP_ColocCollection.cpp">
+      <Filter>0_App\Shader\PP_ColorCollection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

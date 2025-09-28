@@ -381,14 +381,21 @@ void KdEditorData::UpdateImGui()
 				{
 					KdAssetManager::GetInstance().CreateRuntimeData();
 				}
-
-
+				
 				ImGui::Separator();
+
+				if (ImGui::MenuItem(u8"使用Assetのコピー"))
+				{
+					KdAssetManager::GetInstance().CopyAssetsKeepFolders();
+				}
+
 				// メニュー項目
 				if (ImGui::MenuItem(u8"Metaファイル削除"))
 				{
 					KdAssetManager::GetInstance().DeleteAllMetaFiles();
 				}
+
+
 
 
 				ImGui::EndMenu();

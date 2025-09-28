@@ -12,12 +12,12 @@ public:
 	// 追従方法
 	enum Type
 	{
-		None,		// 何もなし
 		Totally,	// 完全追従(授業)
 		Position,	// 位置のみ追従
-		Rotation,  // 回転のみ追従
+		Rotation,   // 回転のみ追従
 		Parent,		// 親子構造のように追従
 		LookAt,		// 対象を向き続ける(授業予定)
+		Num,		// 総数
 	};
 
 	virtual void Start()override;
@@ -38,6 +38,7 @@ private:
 
 	Type m_chaseType = LookAt;	// 追従方法
 
-
+	// 親子構造のためのTargetとのズレ分
+	std::shared_ptr<KdMatrix> m_offset = nullptr;
 
 };

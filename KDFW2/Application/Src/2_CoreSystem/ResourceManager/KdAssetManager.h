@@ -6,6 +6,10 @@
 class KdAssetManager 
 {
 public :
+	// ファイル名、フォルダ構成を維持したまま使用するAssetをコピーする
+	void CopyAssetsKeepFolders(const std::string& outPath = "../実行データ/")const;
+
+
 	// ゲーム実行中に称するAssetの情報
 	struct AssetPropety {
 		std::string guid = "";
