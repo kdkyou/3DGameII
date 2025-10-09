@@ -171,6 +171,17 @@ void KdShaderManager::Release()
 	m_bs_Multiply = nullptr;
 }
 
+const int KdShaderManager::UseNumber()
+{
+	for (int i = 0; i < 100;i++) {
+		if (m_pointsUsed[i] == false)
+		{
+			return i;
+		}
+	}
+	return 0;
+}
+
 void KdShaderManager::SetCommonSamplers()
 {
 	m_ss_Anisotropic_Wrap->SetToDevice(0);

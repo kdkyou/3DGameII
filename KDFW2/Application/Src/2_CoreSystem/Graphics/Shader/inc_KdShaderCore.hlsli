@@ -85,7 +85,7 @@ struct PointLight
     float3 Color; // 色
     float Radius; // 半径
     float3 Pos; // 座標
-    float tmp;
+    float enable; // 有効無効フラグ
 };
 
 cbuffer cbLight : register(b8)
@@ -117,7 +117,7 @@ cbuffer cbLight : register(b8)
     // 点光
     //-------------------------
 
-//    PointLight g_PL[100]; // 全ての平行光データ
+    PointLight g_PL[100]; // 全ての平行光データ
      
     //-------------------------
     // フォグ

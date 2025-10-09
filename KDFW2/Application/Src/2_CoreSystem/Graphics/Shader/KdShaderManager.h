@@ -197,19 +197,18 @@ public:
 		};
 		std::array<SpotLight, 10>	SL;
 
-		/*
 		//--------------------------
 		// 点光
 		//--------------------------
-		struct PointLight
+		struct PointLight 
 		{
-			Vector3	Color;			// 色
-			float	Radius;			// 半径
-			Vector3	Pos;			// 座標
-			float tmp;
+			KdVector3	Color	= KdVector3(1,1,1);
+			float       Radius	= 10.0f;	// ポイントライトが届く範囲
+			KdVector3	Pos		= KdVector3(0, 0.5f, 0);
+			float       enable	= false;	// 有効無効フラグ
+
 		};
-		std::array<PointLight, 100>	PL;
-		*/
+		std::array<PointLight, 100> PointLights;
 
 		//--------------------------
 		// 距離フォグ
@@ -229,6 +228,38 @@ public:
 
 	// ライト定数バッファ
 	std::shared_ptr<KdConstantBufferType<CBLight>>	m_cbLight;
+	// ポイントライト複数制御用
+	std::array<bool, 100> m_pointsUsed;
+	
+
+
+	// ポイントライトの設定
+	void SetPointLight(const CBLight::PointLight& p, int no = 0)
+	{
+		auto& in = m_cbLight->EditCB().PointLights[no];
+		in.Color = p.Color;
+		in.Pos = p.Pos;
+		in.Radius = p.Radius;
+		in.enable = p.enable;
+		m_pointsUsed[no] = true;
+	}
+	// 課題
+	// ポイントライトが複数になっても対応する
+	const int UseNumber();
+
+	
+	// 最大数を超えたときの対応
+	// ポイントライトの追加削除を行っても破綻の無いようにする
+	void ResetLight(int no = 0) {
+		auto& in = m_cbLight->EditCB().PointLights[no];
+		in.Color = {1,1,1,1};
+		in.Pos = {0.0f,0.5f,0.0f};
+		in.Radius = 10.0f;
+		in.enable = 0.0f;
+		m_pointsUsed[no] = false;
+
+	}
+
 
 	//==========================
 	// 

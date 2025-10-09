@@ -304,6 +304,9 @@
     <ClInclude Include="Src\0_App\Shader\PP_ColorCollection\PP_ColocCollection.h">
       <Filter>0_App\Shader\PP_ColorCollection</Filter>
     </ClInclude>
+    <ClInclude Include="Src\1_Framework\Component\KdPointLightComponent.h">
+      <Filter>1_Framework\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\0_App\Windows\WindowsWindow.cpp">
@@ -513,6 +516,9 @@
     </ClCompile>
     <ClCompile Include="Src\0_App\Shader\PP_ColorCollection\PP_ColocCollection.cpp">
       <Filter>0_App\Shader\PP_ColorCollection</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\1_Framework\Component\KdPointLightComponent.cpp">
+      <Filter>1_Framework\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
