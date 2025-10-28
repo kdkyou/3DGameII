@@ -68,6 +68,9 @@ bool KdMaterial::SetToDevice(uint32_t passIdx)
 	{
 		D3D.GetDevContext()->GSSetShader(shaderPass->m_GS.Get(), 0, 0);
 	}
+	else {
+		D3D.GetDevContext()->GSSetShader(nullptr, 0, 0);
+	}
 
 	return true;
 }
