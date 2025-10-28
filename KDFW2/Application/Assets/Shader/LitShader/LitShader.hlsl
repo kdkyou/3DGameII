@@ -126,6 +126,8 @@ PSOutput PS(VSOutput In) : SV_Target0
 
     float NdotV = saturate(dot(wN, vCam));
     
+    
+    
     // アルファディザ
     {
         const float bayer[] =
@@ -418,4 +420,43 @@ ShadowCasterVSOutput ShadowCasterVS(float4 pos : POSITION, // 頂点座標
 float4 ShadowCasterPS(ShadowCasterVSOutput In) : SV_Target0
 {
     return In.wvpPos.z / In.wvpPos.w;
+}
+
+// ジオメトリシェーダー
+[maxvertexcount(24)] // 処理する超点数
+void GS(triangle VSOutput In[3], //VSから送り込まれる面
+    inout TriangleStream<VSOutput> OutputStream //PSに送り込むデータ(RasterRizer)
+    
+)
+{
+    int numFace = 24 / 3;  //GSが生み出す面数
+    for (int face = 0; face < numFace; face++)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            //PS(ラスタライザー)に送り込むデータ
+            VSOutput output;
+            // 一旦丸々コピー
+            output.Pos = In[i].Pos;
+            output.UV = In[i].UV;
+            output.wB = In[i].wB;
+            output.wN = In[i].wN;
+            output.wPos = In[i].wPos;
+            output.wT = In[i].wT;
+            
+            // 面の方向に少し動かす
+            uint num = face; // 現在何面目か
+            output.wPos.xyz = In[i].wPos.xyz + In[i].wN * 0.005 * num;
+            // ワールド座標から射影座標に変換
+            output.Pos = mul(float4(output.wPos, 1), g_mV);
+            output.Pos = mul(output.Pos, g_mP);
+            // 出力ストリームに頂点を追加
+            OutputStream.Append(output);
+        }
+        
+        // ここまでを三角形としてストリームをリセット
+        OutputStream.RestartStrip();
+
+    }
+    
 }

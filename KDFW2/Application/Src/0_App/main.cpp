@@ -86,7 +86,8 @@ bool Application::Initialize()
 		// 通常描画
 		shader->LoadShaderAndSetPass("Assets/Shader/LitShader", "LitShader.hlsl",
 			KdShader::PassTags::Forward, "Default",
-			"VS", "PS", "");
+			"VS", "PS", "GS");
+
 
 		// シャドウキャスター用
 		shader->LoadShaderAndSetPass("Assets/Shader/LitShader", "LitShader.hlsl",
