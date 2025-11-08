@@ -31,6 +31,18 @@ bool KdMaterial::SetToDevice(uint32_t passIdx)
 		D3D.SetTextureToGS(tex.first, tex.second.get());
 	}
 
+	// 一旦無理やりテクスチャを設定
+	static std::shared_ptr<KdTexture> fur = nullptr;
+	if (fur == nullptr)
+	{
+		fur = KdResourceManager::GetInstance().LoadAsset<KdTexture>("Assets/Textures/FurCross.png");
+	}
+	else {
+		D3D.SetTextureToVS(20,fur.get());
+		D3D.SetTextureToGS(20,fur.get());
+		D3D.SetTextureToPS(20,fur.get());
+	}
+
 	//---------------------------
 	// マテリアル情報：定数バッファをセット
 	//---------------------------

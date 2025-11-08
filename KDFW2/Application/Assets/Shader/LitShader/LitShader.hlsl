@@ -22,6 +22,8 @@ Texture2D g_normalMap : register(t1); // 法線マップ
 Texture2D g_metallicSmoothnesMap : register(t2); // 滑らかさ＆金属マップ
 Texture2D g_emissiveMap : register(t3); // 放射色マップ
 
+Texture2D g_furCSTexture : register(t20);
+
 // サンプラ
 //SamplerState g_ss : register(s0);
 //SamplerComparisonState g_ss_comparison : register(s15);
@@ -52,6 +54,19 @@ struct VSOutput
     float3 wN : TEXCOORD3; // ワールド法線
 //    float4 Color : TEXCOORD4;   // 色
     float3 wPos : TEXCOORD5; // ワールド3D座標
+};
+
+struct GSOutput
+{
+    float4 Pos : SV_Position; // 射影座標
+    float2 UV : TEXCOORD0; // UV座標
+    float3 wT : TEXCOORD1; // ワールド接線
+    float3 wB : TEXCOORD2; // ワールド従法線
+    float3 wN : TEXCOORD3; // ワールド法線
+//    float4 Color : TEXCOORD4;   // 色
+    float3 wPos : TEXCOORD5; // ワールド3D座標
+    // 現在の層の深さ(0.0～1.0)
+    float LayerDepth :TEXCOORD6;    
 };
 
 // ピクセルシェーダーから出力するデータ
@@ -102,7 +117,7 @@ VSOutput VS(  float4 pos : POSITION,  // 頂点座標
 //-------------------------------
 
 // ピクセルシェーダ
-PSOutput PS(VSOutput In) : SV_Target0
+PSOutput PS(GSOutput In) : SV_Target0
 {
     PSOutput Out = (PSOutput) 0; //
     
@@ -373,6 +388,7 @@ PSOutput PS(VSOutput In) : SV_Target0
     // 出力
     //------------------------------------------
         Out.color = float4(color, baseColor.a);
+        Out.color.g = 1 - In.LayerDepth;
         Out.normal = float4(wN, 1);
         return Out;
 
@@ -423,40 +439,42 @@ float4 ShadowCasterPS(ShadowCasterVSOutput In) : SV_Target0
 }
 
 // ジオメトリシェーダー
-[maxvertexcount(24)] // 処理する超点数
-void GS(triangle VSOutput In[3], //VSから送り込まれる面
-    inout TriangleStream<VSOutput> OutputStream //PSに送り込むデータ(RasterRizer)
-    
-)
+[maxvertexcount(24)]
+[instance(4)]
+void GS(triangle VSOutput In[3], inout TriangleStream<GSOutput> OutputStream, uint idx : SV_GSInstanceID)
 {
-    int numFace = 24 / 3;  //GSが生み出す面数
+   // int numFace = 24 / 3 * idx; // ジオメトリシェーダーが生み出す面数
+    int numFace = 24 / 3; // ジオメトリシェーダーが生み出す面数
     for (int face = 0; face < numFace; face++)
     {
         for (int i = 0; i < 3; i++)
         {
-            //PS(ラスタライザー)に送り込むデータ
-            VSOutput output;
-            // 一旦丸々コピー
+            // 出力構造体を初期化
+            GSOutput output;
+
+            // 頂点シェーダーからのデータをそのままコピー
             output.Pos = In[i].Pos;
+            output.wPos = In[i].wPos;
             output.UV = In[i].UV;
+            output.wT = In[i].wT;
             output.wB = In[i].wB;
             output.wN = In[i].wN;
-            output.wPos = In[i].wPos;
-            output.wT = In[i].wT;
+
+          //  uint num = (face * idx);
+            uint num = face + (8 * idx);
+            //uint num = face; // 現在の面数
+            output.wPos.xyz = In[i].wPos.xyz + In[i].wN * 0.005f * num; // 法線方向に頂点を移動
+            output.Pos = mul(float4(output.wPos, 1), g_mV); // ワールド座標系 -> ビュー座標系へ変換
+            output.Pos = mul(output.Pos, g_mP); // ビュー座標系 -> 射影座標系へ変換
+
+            // 生み出す面が外に行くたび1に近づく
+            output.LayerDepth = (float)num / 32.0f;
             
-            // 面の方向に少し動かす
-            uint num = face; // 現在何面目か
-            output.wPos.xyz = In[i].wPos.xyz + In[i].wN * 0.005 * num;
-            // ワールド座標から射影座標に変換
-            output.Pos = mul(float4(output.wPos, 1), g_mV);
-            output.Pos = mul(output.Pos, g_mP);
-            // 出力ストリームに頂点を追加
+            //  出力ストリームに頂点を追加
             OutputStream.Append(output);
         }
-        
-        // ここまでを三角形としてストリームをリセット
-        OutputStream.RestartStrip();
 
+        // 三角形を形成してストリームをリセット
+        OutputStream.RestartStrip();
     }
-    
 }
